@@ -14,9 +14,9 @@ interface Dashboard {
   open_letters?: number
   breaches_detected?: number
   savings_ytd_cents?: number
-  upcoming_deadlines?: number
+  upcoming_deadlines?: Deadline[]
   recent_activity?: ActivityRow[]
-  counts?: Record<string, number>
+  counts?: Record<string, number | Record<string, number>>
 }
 
 interface ActivityRow {
@@ -129,21 +129,23 @@ export default function DashboardHome() {
         />
         <Stat
           label="Upcoming Deadlines"
-          value={d.upcoming_deadlines ?? upcoming.length}
+          value={d.upcoming_deadlines?.length ?? upcoming.length}
           hint={overdueCount ? `${overdueCount} overdue` : 'Response & notice windows'}
           tone={overdueCount ? 'red' : 'default'}
         />
       </div>
 
       {/* Secondary counts */}
-      {Object.keys(counts).length > 0 && (
+      {Object.entries(counts).some(([, v]) => typeof v === 'number') && (
         <Card>
           <CardHeader>
             <h2 className="text-sm font-semibold text-slate-200">Portfolio Snapshot</h2>
           </CardHeader>
           <CardBody>
             <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
-              {Object.entries(counts).map(([k, v]) => (
+              {Object.entries(counts)
+                .filter((entry): entry is [string, number] => typeof entry[1] === 'number')
+                .map(([k, v]) => (
                 <div key={k} className="rounded-lg border border-slate-800 bg-slate-950/40 px-3 py-3">
                   <div className="text-xs uppercase tracking-wide text-slate-500">{k.replace(/_/g, ' ')}</div>
                   <div className="mt-1 text-xl font-bold tabular-nums text-slate-200">{v}</div>
