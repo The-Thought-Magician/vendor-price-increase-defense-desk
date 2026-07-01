@@ -62,19 +62,19 @@ router.get('/savings', async (c) => {
   const categoryById = new Map(categoryRows.map((cat) => [cat.id, cat]))
 
   type Bucket = {
-    proposed_impact_cents: number
-    accepted_impact_cents: number
+    proposed_cents: number
+    accepted_cents: number
     avoided_cents: number
     letters: number
   }
   const emptyBucket = (): Bucket => ({
-    proposed_impact_cents: 0,
-    accepted_impact_cents: 0,
+    proposed_cents: 0,
+    accepted_cents: 0,
     avoided_cents: 0,
     letters: 0,
   })
 
-  const totals = emptyBucket()
+  const totals = { ...emptyBucket(), contests_won: 0 }
   const bySupplier = new Map<string, Bucket & { supplier_id: string; supplier_name: string }>()
   const byCategory = new Map<string, Bucket & { category_id: string; category_name: string }>()
 
@@ -95,10 +95,11 @@ router.get('/savings', async (c) => {
     }
     const avoided = Math.max(0, proposedImpact - acceptedImpact)
 
-    totals.proposed_impact_cents += proposedImpact
-    totals.accepted_impact_cents += acceptedImpact
+    totals.proposed_cents += proposedImpact
+    totals.accepted_cents += acceptedImpact
     totals.avoided_cents += avoided
     totals.letters += 1
+    if (avoided > 0) totals.contests_won += 1
 
     const sup = supplierById.get(letter.supplier_id)
     const supKey = letter.supplier_id
@@ -110,8 +111,8 @@ router.get('/savings', async (c) => {
       })
     }
     const sb = bySupplier.get(supKey)!
-    sb.proposed_impact_cents += proposedImpact
-    sb.accepted_impact_cents += acceptedImpact
+    sb.proposed_cents += proposedImpact
+    sb.accepted_cents += acceptedImpact
     sb.avoided_cents += avoided
     sb.letters += 1
 
@@ -124,8 +125,8 @@ router.get('/savings', async (c) => {
       })
     }
     const cb = byCategory.get(catId)!
-    cb.proposed_impact_cents += proposedImpact
-    cb.accepted_impact_cents += acceptedImpact
+    cb.proposed_cents += proposedImpact
+    cb.accepted_cents += acceptedImpact
     cb.avoided_cents += avoided
     cb.letters += 1
   }
@@ -142,14 +143,38 @@ router.get('/savings', async (c) => {
 // ---------------------------------------------------------------------------
 router.get('/inflation-wave', async (c) => {
   const letters = await db.select().from(increase_letters)
+  const validations = await db.select().from(index_validations)
+
+  const entitledByLetter = new Map<string, number[]>()
+  const overAskByLetter = new Map<string, number[]>()
+  for (const v of validations) {
+    if (v.entitled_pct != null) {
+      const arr = entitledByLetter.get(v.letter_id) ?? []
+      arr.push(v.entitled_pct)
+      entitledByLetter.set(v.letter_id, arr)
+    }
+    if (v.over_ask_pct != null) {
+      const arr = overAskByLetter.get(v.letter_id) ?? []
+      arr.push(v.over_ask_pct)
+      overAskByLetter.set(v.letter_id, arr)
+    }
+  }
+  const avgOf = (arr: number[] | undefined) => (arr && arr.length ? arr.reduce((a, b) => a + b, 0) / arr.length : null)
 
   type Period = {
     period: string
-    letter_count: number
+    letters: number
     total_proposed_pct: number
     avg_proposed_pct: number
-    total_proposed_impact_cents: number
-    breach_count: number
+    total_entitled_pct: number
+    entitled_count: number
+    avg_entitled_pct: number
+    total_over_ask_pct: number
+    over_ask_count: number
+    avg_over_ask_pct: number
+    proposed_cents: number
+    avoided_cents: number
+    breaches: number
   }
   const periods = new Map<string, Period>()
 
@@ -160,31 +185,60 @@ router.get('/inflation-wave', async (c) => {
     if (!periods.has(label)) {
       periods.set(label, {
         period: label,
-        letter_count: 0,
+        letters: 0,
         total_proposed_pct: 0,
         avg_proposed_pct: 0,
-        total_proposed_impact_cents: 0,
-        breach_count: 0,
+        total_entitled_pct: 0,
+        entitled_count: 0,
+        avg_entitled_pct: 0,
+        total_over_ask_pct: 0,
+        over_ask_count: 0,
+        avg_over_ask_pct: 0,
+        proposed_cents: 0,
+        avoided_cents: 0,
+        breaches: 0,
       })
     }
     const p = periods.get(label)!
-    p.letter_count += 1
+    p.letters += 1
     p.total_proposed_pct += letter.proposed_pct ?? 0
-    p.total_proposed_impact_cents += letter.annual_impact_cents ?? 0
-    if (letter.aggregate_verdict === 'breach') p.breach_count += 1
+    p.proposed_cents += letter.annual_impact_cents ?? 0
+    if (letter.aggregate_verdict === 'breach') p.breaches += 1
+    const entitled = avgOf(entitledByLetter.get(letter.id))
+    if (entitled != null) {
+      p.total_entitled_pct += entitled
+      p.entitled_count += 1
+    }
+    const overAsk = avgOf(overAskByLetter.get(letter.id))
+    if (overAsk != null) {
+      p.total_over_ask_pct += overAsk
+      p.over_ask_count += 1
+      const proposedPct = letter.proposed_pct ?? 0
+      if (proposedPct > 0 && entitled != null) {
+        p.avoided_cents += Math.round((letter.annual_impact_cents ?? 0) * (overAsk / proposedPct))
+      }
+    }
   }
 
   const sorted = [...periods.values()].sort((a, b) => a.period.localeCompare(b.period))
   for (const p of sorted) {
-    p.avg_proposed_pct = p.letter_count > 0 ? p.total_proposed_pct / p.letter_count : 0
+    p.avg_proposed_pct = p.letters > 0 ? p.total_proposed_pct / p.letters : 0
+    p.avg_entitled_pct = p.entitled_count > 0 ? p.total_entitled_pct / p.entitled_count : 0
+    p.avg_over_ask_pct = p.over_ask_count > 0 ? p.total_over_ask_pct / p.over_ask_count : 0
   }
 
   // Quarter-over-quarter deltas in average proposed pct.
   const withDelta = sorted.map((p, i) => {
     const prev = i > 0 ? sorted[i - 1] : null
     const qoq_avg_pct_delta = prev ? p.avg_proposed_pct - prev.avg_proposed_pct : 0
-    const qoq_letter_count_delta = prev ? p.letter_count - prev.letter_count : 0
-    return { ...p, qoq_avg_pct_delta, qoq_letter_count_delta }
+    const qoq_letter_count_delta = prev ? p.letters - prev.letters : 0
+    const { total_proposed_pct, total_entitled_pct, entitled_count, total_over_ask_pct, over_ask_count, ...clean } = p
+    void total_proposed_pct
+    void total_entitled_pct
+    void entitled_count
+    void total_over_ask_pct
+    void over_ask_count
+    return { ...clean, qoq_avg_pct_delta, qoq_letter_count_delta }
   })
 
   return c.json({ periods: withDelta })
@@ -197,6 +251,17 @@ router.get('/supplier-behavior', async (c) => {
   const letters = await db.select().from(increase_letters)
   const supplierRows = await db.select().from(suppliers)
   const validations = await db.select().from(index_validations)
+  const scenarios = await db.select().from(counter_scenarios)
+
+  const recommendedByLetter = new Map<string, { applied_pct: number | null; annual_impact_cents: number }>()
+  for (const s of scenarios) {
+    if (s.is_recommended && !recommendedByLetter.has(s.letter_id)) {
+      recommendedByLetter.set(s.letter_id, {
+        applied_pct: s.applied_pct,
+        annual_impact_cents: s.annual_impact_cents,
+      })
+    }
+  }
 
   // Average over-ask pct per letter from index validations.
   const overAskByLetter = new Map<string, number[]>()
@@ -213,9 +278,11 @@ router.get('/supplier-behavior', async (c) => {
     total_letters: number
     breach_letters: number
     contested_letters: number
+    contests_won: number
     avg_proposed_pct: number
     avg_over_ask_pct: number
     total_proposed_impact_cents: number
+    total_avoided_cents: number
     behavior_score: number
   }
   const rows = new Map<string, Row & { _sumProposed: number; _sumOverAsk: number; _overAskCount: number }>()
@@ -230,9 +297,11 @@ router.get('/supplier-behavior', async (c) => {
         total_letters: 0,
         breach_letters: 0,
         contested_letters: 0,
+        contests_won: 0,
         avg_proposed_pct: 0,
         avg_over_ask_pct: 0,
         total_proposed_impact_cents: 0,
+        total_avoided_cents: 0,
         behavior_score: 0,
         _sumProposed: 0,
         _sumOverAsk: 0,
@@ -242,9 +311,24 @@ router.get('/supplier-behavior', async (c) => {
     const r = rows.get(key)!
     r.total_letters += 1
     r._sumProposed += letter.proposed_pct ?? 0
-    r.total_proposed_impact_cents += letter.annual_impact_cents ?? 0
+    const proposedImpact = letter.annual_impact_cents ?? 0
+    r.total_proposed_impact_cents += proposedImpact
     if (letter.aggregate_verdict === 'breach') r.breach_letters += 1
     if (letter.status === 'contested') r.contested_letters += 1
+    const rec = recommendedByLetter.get(letter.id)
+    const proposedPct = letter.proposed_pct ?? 0
+    const acceptedPct = settledPct(letter, rec)
+    let acceptedImpact: number
+    if (rec && rec.annual_impact_cents) {
+      acceptedImpact = rec.annual_impact_cents
+    } else if (proposedPct > 0) {
+      acceptedImpact = Math.round(proposedImpact * (acceptedPct / proposedPct))
+    } else {
+      acceptedImpact = proposedImpact
+    }
+    const avoided = Math.max(0, proposedImpact - acceptedImpact)
+    r.total_avoided_cents += avoided
+    if (avoided > 0) r.contests_won += 1
     const overAsks = overAskByLetter.get(letter.id)
     if (overAsks && overAsks.length) {
       const avg = overAsks.reduce((a, b) => a + b, 0) / overAsks.length
