@@ -11,6 +11,7 @@ import {
   cumulative_creep_records,
   rebuttal_templates,
   suppliers,
+  indices,
 } from '../db/schema.js'
 import { eq, and, desc, asc } from 'drizzle-orm'
 import { authMiddleware, getUserId } from '../lib/auth.js'
@@ -19,6 +20,10 @@ const router = new Hono()
 
 function round2(n: number): number {
   return Math.round(n * 100) / 100
+}
+
+function renderTemplate(str: string, ctx: Record<string, string | number>): string {
+  return str.replace(/\{\{(\w+)\}\}/g, (_, k) => (ctx[k] !== undefined ? String(ctx[k]) : ''))
 }
 
 const TONES = ['firm', 'collaborative', 'escalation'] as const
@@ -124,6 +129,8 @@ router.post('/generate', authMiddleware, zValidator('json', generateSchema), asy
     .select()
     .from(rebuttal_templates)
     .where(eq(rebuttal_templates.workspace_id, letter.workspace_id))
+  const allIndices = await db.select().from(indices)
+  const indexNameById = new Map(allIndices.map((i) => [i.id, i.name]))
 
   const templateFor = (breachType: string) =>
     templates.find((t) => t.breach_type === breachType && t.tone === tone) ??
@@ -178,7 +185,18 @@ router.post('/generate', authMiddleware, zValidator('json', generateSchema), asy
         )}%.`,
       )
     }
-    if (tmpl) parts.push(tmpl.body)
+    if (tmpl) {
+      parts.push(
+        renderTemplate(tmpl.body, {
+          proposed_pct: round2(chk.actual_value ?? proposed),
+          cap_pct: round2(chk.expected_value ?? 0),
+          entitled_pct: round2(chk.expected_value ?? 0),
+          notice_days: chk.expected_value ?? 0,
+          fixed_end_date: chk.citation_text ?? '',
+          citation: chk.citation_text ?? '',
+        }),
+      )
+    }
     sectionRows.push({
       section_type: 'clause',
       heading: `Clause issue: ${chk.clause_type} (${chk.verdict}, ${chk.severity})`,
@@ -199,7 +217,15 @@ router.post('/generate', authMiddleware, zValidator('json', generateSchema), asy
     }
     if (v.over_ask_pct !== null && v.over_ask_pct > 0) {
       const tmpl = templateFor('index_over_ask')
-      if (tmpl) parts.push(tmpl.body)
+      if (tmpl) {
+        parts.push(
+          renderTemplate(tmpl.body, {
+            index: (v.index_id ? indexNameById.get(v.index_id) : undefined) ?? 'index',
+            entitled_pct: round2(v.entitled_pct ?? v.actual_pct ?? 0),
+            proposed_pct: round2(v.claimed_pct ?? proposed),
+          }),
+        )
+      }
     }
     sectionRows.push({
       section_type: 'index',
@@ -222,7 +248,14 @@ router.post('/generate', authMiddleware, zValidator('json', generateSchema), asy
     if (latestCreep.breached) {
       parts.push('This proposal would push cumulative increases beyond the contractual cumulative cap.')
       const tmpl = templateFor('cumulative')
-      if (tmpl) parts.push(tmpl.body)
+      if (tmpl) {
+        parts.push(
+          renderTemplate(tmpl.body, {
+            cumulative_pct: round2(latestCreep.cumulative_pct),
+            cap_pct: round2(latestCreep.cap_pct ?? 0),
+          }),
+        )
+      }
     }
     sectionRows.push({
       section_type: 'creep',
