@@ -3,91 +3,91 @@ import Link from 'next/link'
 const features = [
   {
     title: 'Increase-Letter Intake',
-    body: 'Log every supplier increase letter with proposed percent, effective date, justification, and per-SKU line items. Auto-suggest the matching supplier and contract.',
+    body: 'Every supplier increase letter is logged with proposed percent, effective date, stated justification, and per-SKU line items, then matched to the governing supplier and contract automatically.',
   },
   {
     title: 'Contract & Clause Library',
-    body: 'Store contracts with caps, fixed-price windows, indexation formulas, notice windows, and cumulative multi-year caps, with verbatim citation snippets.',
+    body: 'Your governing agreements become structured data: caps, fixed-price windows, indexation formulas, notice windows, and cumulative multi-year caps, each with a verbatim citation on file.',
   },
   {
     title: 'Clause-Check Engine',
-    body: 'Run deterministic checks per letter: cap, fixed-price period, notice window, and indexation eligibility, each with a verdict, severity, and clause citation.',
+    body: 'Each letter is run against every applicable clause: cap, fixed-price period, notice window, and indexation eligibility. Every check returns a verdict, a severity, and the exact clause it rests on.',
   },
   {
     title: 'Index Validation',
-    body: 'Compare the claimed cost-driver movement (PPI, CPI, ECI, commodity, FX) to the actual published series, including weighted baskets, and flag the over-ask delta.',
+    body: 'The cost-driver movement a supplier cites, whether PPI, CPI, ECI, a commodity index, or FX, is checked against the actual published series, weighted baskets included, and the over-ask is quantified.',
   },
   {
     title: 'Cumulative-Creep Tracker',
-    body: 'Track stacked increases per contract over time, compute compounded movement, and alert when the next increase would breach a multi-year cumulative cap.',
+    body: 'Stacked increases are tracked per contract across years, compounded movement is computed, and your team is alerted before the next increase would breach a multi-year cumulative cap.',
   },
   {
     title: 'Pushback-Packet Generator',
-    body: 'Assemble a clause-cited packet with index math, creep evidence, and a recommended counter-percent. Choose tone, edit the draft, export to text or markdown.',
+    body: 'A clause-cited packet is assembled with the index math, the creep evidence, and a recommended counter-percent, ready for your team to review, adjust the tone, and send.',
   },
   {
     title: 'Approval Workflow & Audit',
-    body: 'Multi-step approvals with dollar-impact thresholds, comment threads, and an immutable decision log of who changed what, when, and why.',
+    body: 'Multi-step approvals apply at the dollar-impact thresholds you set, with comment threads and an immutable decision log of who changed what, when, and why.',
   },
   {
     title: 'P&L Margin-Impact Rollup',
-    body: 'Annualize each letter from baseline spend and the accepted-vs-contested delta, then roll up total proposed, accepted, and avoided savings for the CFO.',
+    body: 'Each letter is annualized against baseline spend, and the accepted-versus-contested delta rolls up into a single margin view your CFO can act on.',
   },
   {
     title: 'Supplier Scorecards',
-    body: 'Per-supplier history of contests, average over-ask, defensibility trend, and a behavior score for how often a vendor pushes beyond index or cap.',
+    body: 'A running record per supplier: contest history, average over-ask, defensibility trend, and a behavior score for how consistently a vendor pushes beyond index or cap.',
   },
 ]
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-slate-950 text-slate-100">
-      <nav className="flex items-center justify-between border-b border-slate-800 px-6 py-4">
+    <main className="min-h-screen bg-neutral-950 text-neutral-100">
+      <nav className="flex items-center justify-between border-b border-neutral-800 px-6 py-4">
         <span className="flex items-center gap-2">
-          <span className="flex h-7 w-7 items-center justify-center rounded-md bg-orange-600 text-sm font-black text-white">
+          <span className="flex h-7 w-7 items-center justify-center rounded-md bg-red-600 text-sm font-bold text-white">
             V
           </span>
-          <span className="text-base font-black tracking-tight text-orange-400">VendorPriceIncreaseDefenseDesk</span>
+          <span className="text-base font-bold tracking-tight text-red-400">VendorPriceIncreaseDefenseDesk</span>
         </span>
         <div className="flex items-center gap-3">
-          <Link href="/pricing" className="hidden text-sm text-slate-300 hover:text-white sm:inline">
+          <Link href="/pricing" className="hidden text-sm text-neutral-300 hover:text-white sm:inline">
             Pricing
           </Link>
-          <Link href="/auth/sign-in" className="text-sm text-slate-300 hover:text-white">
+          <Link href="/auth/sign-in" className="text-sm text-neutral-300 hover:text-white">
             Sign In
           </Link>
           <Link
             href="/auth/sign-up"
-            className="rounded-lg bg-orange-600 px-4 py-2 text-sm font-medium text-white hover:bg-orange-500"
+            className="rounded-lg bg-red-600 px-4 py-2 text-sm font-medium text-white hover:bg-red-500"
           >
-            Get Started
+            Request Access
           </Link>
         </div>
       </nav>
 
       {/* Hero */}
       <section className="mx-auto max-w-5xl px-6 py-24 text-center">
-        <span className="inline-flex items-center rounded-full border border-orange-800/60 bg-orange-950/40 px-3 py-1 text-xs font-medium text-orange-300">
-          Defend margin one letter at a time
+        <span className="inline-flex items-center rounded-full border border-red-800/60 bg-red-950/40 px-3 py-1 text-xs font-medium text-red-300">
+          For procurement, contracts, and finance teams
         </span>
-        <h1 className="mt-6 text-4xl font-black tracking-tight text-white sm:text-6xl">
-          Stop over-accepting supplier price increases.
+        <h1 className="mt-6 text-4xl font-bold tracking-tight text-white sm:text-6xl">
+          A disciplined answer to every price-increase letter.
         </h1>
-        <p className="mx-auto mt-6 max-w-2xl text-lg text-slate-400">
-          VendorPriceIncreaseDefenseDesk validates every increase letter against the governing contract and the real
-          published indices, then generates a clause-cited pushback packet your team can send back. Deterministic,
-          auditable, and rolled up to a CFO-ready margin view.
+        <p className="mx-auto mt-6 max-w-2xl text-lg text-neutral-400">
+          VendorPriceIncreaseDefenseDesk checks each supplier increase letter against the governing contract and the
+          actual published cost-driver indices, then prepares a clause-cited pushback packet your team can stand
+          behind. The result is a deterministic, auditable review, not a judgment call made under time pressure.
         </p>
         <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
           <Link
             href="/auth/sign-up"
-            className="rounded-lg bg-orange-600 px-6 py-3 font-semibold text-white hover:bg-orange-500"
+            className="rounded-lg bg-red-600 px-6 py-3 font-semibold text-white hover:bg-red-500"
           >
-            Start defending margin
+            Start a consultation
           </Link>
           <Link
             href="/auth/sign-in"
-            className="rounded-lg border border-slate-700 bg-slate-900 px-6 py-3 font-semibold text-slate-200 hover:bg-slate-800"
+            className="rounded-lg border border-neutral-700 bg-neutral-900 px-6 py-3 font-semibold text-neutral-200 hover:bg-neutral-800"
           >
             Sign in
           </Link>
@@ -95,59 +95,65 @@ export default function Home() {
       </section>
 
       {/* Problem */}
-      <section className="border-y border-slate-800 bg-slate-900/40">
+      <section className="border-y border-neutral-800 bg-neutral-900/40">
         <div className="mx-auto max-w-4xl px-6 py-16">
-          <h2 className="text-2xl font-bold text-white">The quiet margin leak</h2>
-          <p className="mt-4 text-slate-400">
-            Suppliers fire off price-increase letters in inflation waves, citing &ldquo;rising input costs&rdquo; or
-            &ldquo;indexation.&rdquo; Buyers lack the bandwidth to check each letter against the actual contract and the
-            actual published index movement, so they over-accept. A one-to-two point over-acceptance across a large
-            supplier base is real, recurring margin erosion. The contract that should constrain the increase is a PDF
-            nobody re-reads, the cited index is rarely validated, and multi-year cumulative caps are almost never
-            tracked. VendorPriceIncreaseDefenseDesk closes that loop, from letter to clause to index to pushback to P&amp;L.
+          <h2 className="text-2xl font-bold text-white">The margin leak most teams cannot see</h2>
+          <p className="mt-4 text-neutral-400">
+            Suppliers send price-increase letters in waves, typically citing rising input costs or indexation.
+            Procurement teams rarely have the bandwidth to verify each letter against the governing contract or the
+            published index it references, so increases are accepted more often than they should be. A one-to-two
+            point over-acceptance across a large supplier base compounds into material, recurring margin erosion.
+            The contract that should constrain the increase sits unread in a PDF, the cited index goes unverified,
+            and multi-year cumulative caps go untracked because no one carries that history forward.
+            VendorPriceIncreaseDefenseDesk closes that gap end to end, from letter, to clause, to index, to
+            pushback, to the P&amp;L line it ultimately affects.
           </p>
         </div>
       </section>
 
       {/* Feature grid */}
       <section className="mx-auto max-w-6xl px-6 py-20">
-        <h2 className="text-center text-2xl font-bold text-white">Everything the defense workflow needs</h2>
+        <h2 className="text-center text-2xl font-bold text-white">A complete review workflow, not a checklist</h2>
+        <p className="mx-auto mt-3 max-w-2xl text-center text-neutral-400">
+          Each capability below exists to remove a specific point of failure in how price increases are currently
+          reviewed and negotiated.
+        </p>
         <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {features.map((f) => (
-            <div key={f.title} className="rounded-xl border border-slate-800 bg-slate-900/60 p-6">
-              <h3 className="text-base font-semibold text-orange-300">{f.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-slate-400">{f.body}</p>
+            <div key={f.title} className="rounded-xl border border-neutral-800 bg-neutral-900/60 p-6">
+              <h3 className="text-base font-semibold text-red-300">{f.title}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-neutral-400">{f.body}</p>
             </div>
           ))}
         </div>
       </section>
 
       {/* CTA */}
-      <section className="border-t border-slate-800 bg-slate-900/40">
+      <section className="border-t border-neutral-800 bg-neutral-900/40">
         <div className="mx-auto max-w-4xl px-6 py-20 text-center">
-          <h2 className="text-3xl font-bold text-white">Turn every increase letter into a defensible decision.</h2>
-          <p className="mx-auto mt-4 max-w-xl text-slate-400">
-            Free to start, with every feature included. Bring your contracts and your indices and let the engine do the
-            math.
+          <h2 className="text-3xl font-bold text-white">Bring your contracts. We will handle the arithmetic.</h2>
+          <p className="mx-auto mt-4 max-w-xl text-neutral-400">
+            Every capability is included from day one. Load your contracts and reference indices, and let the
+            clause-check and index-validation engines produce a defensible position on every letter.
           </p>
           <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <Link
               href="/auth/sign-up"
-              className="rounded-lg bg-orange-600 px-6 py-3 font-semibold text-white hover:bg-orange-500"
+              className="rounded-lg bg-red-600 px-6 py-3 font-semibold text-white hover:bg-red-500"
             >
               Create your account
             </Link>
             <Link
               href="/pricing"
-              className="rounded-lg border border-slate-700 bg-slate-900 px-6 py-3 font-semibold text-slate-200 hover:bg-slate-800"
+              className="rounded-lg border border-neutral-700 bg-neutral-900 px-6 py-3 font-semibold text-neutral-200 hover:bg-neutral-800"
             >
-              See pricing
+              Review pricing
             </Link>
           </div>
         </div>
       </section>
 
-      <footer className="border-t border-slate-800 py-10 text-center text-sm text-slate-600">
+      <footer className="border-t border-neutral-800 py-10 text-center text-sm text-neutral-600">
         <p>VendorPriceIncreaseDefenseDesk</p>
       </footer>
     </main>

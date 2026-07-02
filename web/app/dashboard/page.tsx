@@ -139,16 +139,16 @@ export default function DashboardHome() {
       {Object.entries(counts).some(([, v]) => typeof v === 'number') && (
         <Card>
           <CardHeader>
-            <h2 className="text-sm font-semibold text-slate-200">Portfolio Snapshot</h2>
+            <h2 className="text-sm font-semibold text-neutral-200">Portfolio Snapshot</h2>
           </CardHeader>
           <CardBody>
             <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
               {Object.entries(counts)
                 .filter((entry): entry is [string, number] => typeof entry[1] === 'number')
                 .map(([k, v]) => (
-                <div key={k} className="rounded-lg border border-slate-800 bg-slate-950/40 px-3 py-3">
-                  <div className="text-xs uppercase tracking-wide text-slate-500">{k.replace(/_/g, ' ')}</div>
-                  <div className="mt-1 text-xl font-bold tabular-nums text-slate-200">{v}</div>
+                <div key={k} className="rounded-lg border border-neutral-800 bg-neutral-950/40 px-3 py-3">
+                  <div className="text-xs uppercase tracking-wide text-neutral-500">{k.replace(/_/g, ' ')}</div>
+                  <div className="mt-1 text-xl font-bold tabular-nums text-neutral-200">{v}</div>
                 </div>
               ))}
             </div>
@@ -161,7 +161,7 @@ export default function DashboardHome() {
         <Card>
           <CardHeader>
             <div className="flex items-center justify-between">
-              <h2 className="text-sm font-semibold text-slate-200">Upcoming Deadlines</h2>
+              <h2 className="text-sm font-semibold text-neutral-200">Upcoming Deadlines</h2>
               <Link href="/dashboard/deadlines">
                 <Button variant="ghost" size="sm">View all</Button>
               </Link>
@@ -191,7 +191,7 @@ export default function DashboardHome() {
         <Card>
           <CardHeader>
             <div className="flex items-center justify-between">
-              <h2 className="text-sm font-semibold text-slate-200">Recent Activity</h2>
+              <h2 className="text-sm font-semibold text-neutral-200">Recent Activity</h2>
               <Link href="/dashboard/audit">
                 <Button variant="ghost" size="sm">Audit trail</Button>
               </Link>
@@ -205,19 +205,19 @@ export default function DashboardHome() {
                 description="Letter analysis, packet generation, and approvals will show up here."
               />
             ) : (
-              <ol className="relative space-y-4 border-l border-slate-800 pl-5">
+              <ol className="relative space-y-4 border-l border-neutral-800 pl-5">
                 {activity.map((a) => (
                   <li key={a.id} className="relative">
-                    <span className="absolute -left-[1.45rem] top-1 h-2.5 w-2.5 rounded-full bg-orange-500 ring-4 ring-slate-900" />
+                    <span className="absolute -left-[1.45rem] top-1 h-2.5 w-2.5 rounded-full bg-red-500 ring-4 ring-neutral-900" />
                     <div className="flex items-start justify-between gap-3">
                       <div>
-                        <p className="text-sm text-slate-200">{a.summary || a.action || 'Event'}</p>
+                        <p className="text-sm text-neutral-200">{a.summary || a.action || 'Event'}</p>
                         <div className="mt-1 flex items-center gap-2">
                           {a.entity_type && <Badge tone="neutral">{a.entity_type}</Badge>}
-                          {a.action && <span className="text-xs text-slate-500">{a.action}</span>}
+                          {a.action && <span className="text-xs text-neutral-500">{a.action}</span>}
                         </div>
                       </div>
-                      <span className="shrink-0 text-xs text-slate-500">{fmtDate(a.created_at)}</span>
+                      <span className="shrink-0 text-xs text-neutral-500">{fmtDate(a.created_at)}</span>
                     </div>
                   </li>
                 ))}
@@ -235,7 +235,7 @@ function Header() {
     <div className="flex flex-wrap items-center justify-between gap-3">
       <div>
         <h1 className="text-2xl font-bold text-white">Defense Desk</h1>
-        <p className="mt-1 text-sm text-slate-400">
+        <p className="mt-1 text-sm text-neutral-400">
           Catch unjustified price increases before they sign.
         </p>
       </div>
@@ -263,10 +263,10 @@ function DeadlineRow({ dl, overdue }: { dl: Deadline; overdue?: boolean }) {
     tone = days <= 3 ? 'amber' : 'neutral'
   }
   return (
-    <div className="flex items-center justify-between rounded-lg border border-slate-800 bg-slate-950/40 px-4 py-3">
+    <div className="flex items-center justify-between rounded-lg border border-neutral-800 bg-neutral-950/40 px-4 py-3">
       <div className="min-w-0">
-        <p className="truncate text-sm font-medium text-slate-200">{dl.title || dl.kind || 'Deadline'}</p>
-        <p className="mt-0.5 text-xs text-slate-500">
+        <p className="truncate text-sm font-medium text-neutral-200">{dl.title || dl.kind || 'Deadline'}</p>
+        <p className="mt-0.5 text-xs text-neutral-500">
           {dl.kind && <span className="mr-2 uppercase tracking-wide">{dl.kind}</span>}
           {fmtDate(dl.due_date)}
         </p>

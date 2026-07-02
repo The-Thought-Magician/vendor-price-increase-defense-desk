@@ -194,7 +194,7 @@ export default function BaselinesPage() {
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div>
           <h1 className="text-2xl font-bold text-white">Spend Baselines</h1>
-          <p className="mt-1 text-sm text-slate-500">
+          <p className="mt-1 text-sm text-neutral-500">
             Track annual spend per supplier and category so price-increase impact can be measured against a known base.
           </p>
         </div>
@@ -215,19 +215,19 @@ export default function BaselinesPage() {
       {periodChart.rows.length > 0 && (
         <Card>
           <CardHeader>
-            <h2 className="text-sm font-semibold text-slate-200">Spend by period</h2>
+            <h2 className="text-sm font-semibold text-neutral-200">Spend by period</h2>
           </CardHeader>
           <CardBody className="space-y-3">
             {periodChart.rows.map((r) => (
               <div key={r.period} className="flex items-center gap-3">
-                <div className="w-24 shrink-0 text-xs text-slate-400">{r.period}</div>
-                <div className="flex h-6 flex-1 items-center overflow-hidden rounded bg-slate-800/60">
+                <div className="w-24 shrink-0 text-xs text-neutral-400">{r.period}</div>
+                <div className="flex h-6 flex-1 items-center overflow-hidden rounded bg-neutral-800/60">
                   <div
-                    className="h-full rounded bg-orange-500/80"
+                    className="h-full rounded bg-red-500/80"
                     style={{ width: `${(r.value / periodChart.max) * 100}%` }}
                   />
                 </div>
-                <div className="w-28 shrink-0 text-right text-xs tabular-nums text-slate-300">
+                <div className="w-28 shrink-0 text-right text-xs tabular-nums text-neutral-300">
                   {fmtMoney(r.value)}
                 </div>
               </div>
@@ -239,11 +239,11 @@ export default function BaselinesPage() {
       <Card>
         <CardHeader className="flex flex-wrap items-center justify-between gap-3">
           <div className="flex flex-wrap items-center gap-3">
-            <label className="text-xs uppercase tracking-wide text-slate-500">Supplier</label>
+            <label className="text-xs uppercase tracking-wide text-neutral-500">Supplier</label>
             <select
               value={supplierFilter}
               onChange={(e) => setSupplierFilter(e.target.value)}
-              className="min-w-[14rem] rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-200 focus:border-orange-500 focus:outline-none"
+              className="min-w-[14rem] rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-200 focus:border-red-500 focus:outline-none"
             >
               <option value="">All suppliers</option>
               {suppliers.map((s) => (
@@ -257,7 +257,7 @@ export default function BaselinesPage() {
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Search period, supplier, category…"
-            className="w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-200 placeholder:text-slate-600 focus:border-orange-500 focus:outline-none sm:w-72"
+            className="w-full rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-200 placeholder:text-neutral-600 focus:border-red-500 focus:outline-none sm:w-72"
           />
         </CardHeader>
         <CardBody className="p-0">
@@ -301,9 +301,9 @@ export default function BaselinesPage() {
               <TBody>
                 {filtered.map((b) => (
                   <TR key={b.id}>
-                    <TD className="font-medium text-slate-200">{b.period}</TD>
+                    <TD className="font-medium text-neutral-200">{b.period}</TD>
                     <TD>{supplierName(b.supplier_id)}</TD>
-                    <TD className="text-slate-400">{categoryName(b.category_id)}</TD>
+                    <TD className="text-neutral-400">{categoryName(b.category_id)}</TD>
                     <TD className="text-right tabular-nums">{fmtMoney(b.annual_spend_cents)}</TD>
                     <TD className="text-right">
                       <div className="flex justify-end gap-2">
@@ -345,22 +345,22 @@ export default function BaselinesPage() {
             </div>
           )}
           <div>
-            <label className="mb-1 block text-xs uppercase tracking-wide text-slate-500">
-              Period <span className="text-orange-400">*</span>
+            <label className="mb-1 block text-xs uppercase tracking-wide text-neutral-500">
+              Period <span className="text-red-400">*</span>
             </label>
             <input
               value={form.period}
               onChange={(e) => setForm((f) => ({ ...f, period: e.target.value }))}
               placeholder="2025 or 2025-Q1"
-              className="w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-200 placeholder:text-slate-600 focus:border-orange-500 focus:outline-none"
+              className="w-full rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-200 placeholder:text-neutral-600 focus:border-red-500 focus:outline-none"
             />
           </div>
           <div>
-            <label className="mb-1 block text-xs uppercase tracking-wide text-slate-500">Supplier</label>
+            <label className="mb-1 block text-xs uppercase tracking-wide text-neutral-500">Supplier</label>
             <select
               value={form.supplier_id}
               onChange={(e) => setForm((f) => ({ ...f, supplier_id: e.target.value }))}
-              className="w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-200 focus:border-orange-500 focus:outline-none"
+              className="w-full rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-200 focus:border-red-500 focus:outline-none"
             >
               <option value="">— none —</option>
               {suppliers.map((s) => (
@@ -371,11 +371,11 @@ export default function BaselinesPage() {
             </select>
           </div>
           <div>
-            <label className="mb-1 block text-xs uppercase tracking-wide text-slate-500">Category</label>
+            <label className="mb-1 block text-xs uppercase tracking-wide text-neutral-500">Category</label>
             <select
               value={form.category_id}
               onChange={(e) => setForm((f) => ({ ...f, category_id: e.target.value }))}
-              className="w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-200 focus:border-orange-500 focus:outline-none"
+              className="w-full rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-200 focus:border-red-500 focus:outline-none"
             >
               <option value="">— none —</option>
               {categories.map((c) => (
@@ -386,7 +386,7 @@ export default function BaselinesPage() {
             </select>
           </div>
           <div>
-            <label className="mb-1 block text-xs uppercase tracking-wide text-slate-500">
+            <label className="mb-1 block text-xs uppercase tracking-wide text-neutral-500">
               Annual spend ($)
             </label>
             <input
@@ -396,7 +396,7 @@ export default function BaselinesPage() {
               value={form.annual_spend}
               onChange={(e) => setForm((f) => ({ ...f, annual_spend: e.target.value }))}
               placeholder="0.00"
-              className="w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-200 placeholder:text-slate-600 focus:border-orange-500 focus:outline-none"
+              className="w-full rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-200 placeholder:text-neutral-600 focus:border-red-500 focus:outline-none"
             />
           </div>
         </form>

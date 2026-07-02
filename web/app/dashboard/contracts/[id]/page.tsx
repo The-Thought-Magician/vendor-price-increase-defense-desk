@@ -290,15 +290,15 @@ export default function ContractDetailPage() {
   }
 
   const latestCreep = creep.length > 0 ? creep[0] : null
-  const field = 'w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-100 placeholder:text-slate-600 focus:border-orange-500 focus:outline-none'
-  const label = 'mb-1 block text-xs font-medium uppercase tracking-wide text-slate-500'
+  const field = 'w-full rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-100 placeholder:text-neutral-600 focus:border-red-500 focus:outline-none'
+  const label = 'mb-1 block text-xs font-medium uppercase tracking-wide text-neutral-500'
 
   if (loading) return <PageSpinner label="Loading contract…" />
 
   if (error || !contract) {
     return (
       <div className="space-y-4">
-        <Link href="/dashboard/contracts" className="text-sm text-slate-400 hover:text-orange-400">← Back to contracts</Link>
+        <Link href="/dashboard/contracts" className="text-sm text-neutral-400 hover:text-red-400">← Back to contracts</Link>
         <Card>
           <CardBody className="flex items-center justify-between">
             <span className="text-sm text-red-300">{error || 'Contract not found'}</span>
@@ -315,7 +315,7 @@ export default function ContractDetailPage() {
   return (
     <div className="space-y-6">
       <div>
-        <Link href="/dashboard/contracts" className="text-sm text-slate-400 hover:text-orange-400">← Back to contracts</Link>
+        <Link href="/dashboard/contracts" className="text-sm text-neutral-400 hover:text-red-400">← Back to contracts</Link>
       </div>
 
       <div className="flex flex-wrap items-start justify-between gap-4">
@@ -324,7 +324,7 @@ export default function ContractDetailPage() {
             <h1 className="text-2xl font-bold text-white">{contract.name}</h1>
             <Badge tone={verdictTone(contract.status ?? 'neutral')}>{contract.status || 'unknown'}</Badge>
           </div>
-          <p className="mt-1 text-sm text-slate-500">
+          <p className="mt-1 text-sm text-neutral-500">
             {contract.governing_entity || 'No governing entity'} · {contract.currency || 'USD'} · v{contract.version ?? 1}
             {contract.reference_number ? ` · ${contract.reference_number}` : ''}
           </p>
@@ -347,8 +347,8 @@ export default function ContractDetailPage() {
       {contract.notes && (
         <Card>
           <CardBody>
-            <div className="text-xs font-medium uppercase tracking-wide text-slate-500">Notes</div>
-            <p className="mt-1 whitespace-pre-wrap text-sm text-slate-300">{contract.notes}</p>
+            <div className="text-xs font-medium uppercase tracking-wide text-neutral-500">Notes</div>
+            <p className="mt-1 whitespace-pre-wrap text-sm text-neutral-300">{contract.notes}</p>
           </CardBody>
         </Card>
       )}
@@ -383,10 +383,10 @@ export default function ContractDetailPage() {
                 {clauses.map((c) => (
                   <TR key={c.id}>
                     <TD>
-                      <div className="font-medium text-slate-100">{c.title || clauseLabel(c.clause_type)}</div>
-                      <div className="text-xs text-slate-500">{clauseLabel(c.clause_type)}</div>
+                      <div className="font-medium text-neutral-100">{c.title || clauseLabel(c.clause_type)}</div>
+                      <div className="text-xs text-neutral-500">{clauseLabel(c.clause_type)}</div>
                       {c.citation_text && (
-                        <div className="mt-1 max-w-md truncate text-xs italic text-slate-600" title={c.citation_text}>
+                        <div className="mt-1 max-w-md truncate text-xs italic text-neutral-600" title={c.citation_text}>
                           “{c.citation_text}”
                         </div>
                       )}
@@ -422,7 +422,7 @@ export default function ContractDetailPage() {
         <CardHeader className="flex flex-wrap items-center justify-between gap-2">
           <div>
             <h2 className="text-sm font-semibold text-white">Cumulative Creep Timeline</h2>
-            <p className="text-xs text-slate-500">Stacked price increases across this contract&apos;s letters vs. the cumulative cap.</p>
+            <p className="text-xs text-neutral-500">Stacked price increases across this contract&apos;s letters vs. the cumulative cap.</p>
           </div>
           <Button size="sm" onClick={runCompute} disabled={computing}>
             {computing ? 'Computing…' : 'Recompute Creep'}
@@ -445,7 +445,7 @@ export default function ContractDetailPage() {
 
           {creep.length > 1 && (
             <div className="mt-5">
-              <div className="mb-2 text-xs font-medium uppercase tracking-wide text-slate-500">Compute History</div>
+              <div className="mb-2 text-xs font-medium uppercase tracking-wide text-neutral-500">Compute History</div>
               <Table>
                 <THead>
                   <TR>
@@ -485,20 +485,20 @@ export default function ContractDetailPage() {
           ) : (
             <div className="space-y-3">
               {docs.map((d) => (
-                <div key={d.id} className="rounded-lg border border-slate-800 bg-slate-950/40 px-4 py-3">
+                <div key={d.id} className="rounded-lg border border-neutral-800 bg-neutral-950/40 px-4 py-3">
                   <div className="flex items-center justify-between gap-3">
                     <div className="min-w-0">
                       <div className="flex items-center gap-2">
-                        <span className="font-medium text-slate-100">{d.name}</span>
+                        <span className="font-medium text-neutral-100">{d.name}</span>
                         <Badge tone="neutral">{d.doc_type || 'doc'}</Badge>
                       </div>
                       {d.url && (
                         <a href={d.url} target="_blank" rel="noreferrer" className="text-xs text-sky-400 hover:underline">{d.url}</a>
                       )}
                     </div>
-                    <span className="shrink-0 text-xs text-slate-600">{fmtDate(d.created_at)}</span>
+                    <span className="shrink-0 text-xs text-neutral-600">{fmtDate(d.created_at)}</span>
                   </div>
-                  {d.content && <p className="mt-2 whitespace-pre-wrap text-sm text-slate-400">{d.content}</p>}
+                  {d.content && <p className="mt-2 whitespace-pre-wrap text-sm text-neutral-400">{d.content}</p>}
                 </div>
               ))}
             </div>
@@ -674,15 +674,15 @@ function CreepChart({
     <div className="space-y-5">
       <div className="flex flex-wrap items-center gap-6">
         <div>
-          <div className="text-xs font-medium uppercase tracking-wide text-slate-500">Cumulative</div>
+          <div className="text-xs font-medium uppercase tracking-wide text-neutral-500">Cumulative</div>
           <div className={`text-3xl font-bold tabular-nums ${breached ? 'text-red-400' : 'text-emerald-400'}`}>
             {cumulative.toFixed(2)}%
           </div>
         </div>
         {cap != null && (
           <div>
-            <div className="text-xs font-medium uppercase tracking-wide text-slate-500">Contract Cap</div>
-            <div className="text-3xl font-bold tabular-nums text-slate-300">{cap.toFixed(2)}%</div>
+            <div className="text-xs font-medium uppercase tracking-wide text-neutral-500">Contract Cap</div>
+            <div className="text-3xl font-bold tabular-nums text-neutral-300">{cap.toFixed(2)}%</div>
           </div>
         )}
         <Badge tone={breached ? 'red' : 'green'}>{breached ? 'Cap breached' : 'Within cap'}</Badge>
@@ -690,16 +690,16 @@ function CreepChart({
 
       {/* Cumulative-vs-cap bar */}
       <div>
-        <div className="relative h-7 w-full overflow-hidden rounded-lg border border-slate-800 bg-slate-950">
+        <div className="relative h-7 w-full overflow-hidden rounded-lg border border-neutral-800 bg-neutral-950">
           <div
-            className={`absolute inset-y-0 left-0 ${breached ? 'bg-red-600/70' : 'bg-orange-600/70'}`}
+            className={`absolute inset-y-0 left-0 ${breached ? 'bg-red-600/70' : 'bg-red-600/70'}`}
             style={{ width: scale(cumulative) }}
           />
           {cap != null && (
             <div className="absolute inset-y-0 w-0.5 bg-emerald-400" style={{ left: scale(cap) }} title={`Cap ${cap}%`} />
           )}
         </div>
-        <div className="mt-1 flex justify-between text-[11px] text-slate-600">
+        <div className="mt-1 flex justify-between text-[11px] text-neutral-600">
           <span>0%</span>
           <span>{maxBar.toFixed(1)}%</span>
         </div>
@@ -708,22 +708,22 @@ function CreepChart({
       {/* Step timeline */}
       {series.length > 0 && (
         <div>
-          <div className="mb-2 text-xs font-medium uppercase tracking-wide text-slate-500">Increase Steps</div>
+          <div className="mb-2 text-xs font-medium uppercase tracking-wide text-neutral-500">Increase Steps</div>
           <div className="flex items-end gap-2 overflow-x-auto pb-2">
             {series.map((s, i) => {
               const overCap = cap != null && s.value > cap
               const h = Math.max(6, Math.min(100, (s.value / maxBar) * 100))
               return (
                 <div key={i} className="flex min-w-[56px] flex-col items-center">
-                  <span className="mb-1 text-[11px] tabular-nums text-slate-400">{s.value.toFixed(1)}%</span>
-                  <div className="flex h-28 w-full items-end rounded bg-slate-950/60">
+                  <span className="mb-1 text-[11px] tabular-nums text-neutral-400">{s.value.toFixed(1)}%</span>
+                  <div className="flex h-28 w-full items-end rounded bg-neutral-950/60">
                     <div
-                      className={`w-full rounded-t ${overCap ? 'bg-red-500/70' : 'bg-orange-500/60'}`}
+                      className={`w-full rounded-t ${overCap ? 'bg-red-500/70' : 'bg-red-500/60'}`}
                       style={{ height: `${h}%` }}
                     />
                   </div>
-                  <span className="mt-1 max-w-[56px] truncate text-[11px] text-slate-500" title={s.label}>{s.label}</span>
-                  {s.pct != null && <span className="text-[10px] text-slate-600">+{s.pct.toFixed(1)}%</span>}
+                  <span className="mt-1 max-w-[56px] truncate text-[11px] text-neutral-500" title={s.label}>{s.label}</span>
+                  {s.pct != null && <span className="text-[10px] text-neutral-600">+{s.pct.toFixed(1)}%</span>}
                 </div>
               )
             })}

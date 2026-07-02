@@ -170,7 +170,7 @@ export default function SupplierDetailPage() {
   if (error || !supplier) {
     return (
       <div className="space-y-4">
-        <Link href="/dashboard/suppliers" className="text-sm text-slate-500 hover:text-orange-400">
+        <Link href="/dashboard/suppliers" className="text-sm text-neutral-500 hover:text-red-400">
           ← Suppliers
         </Link>
         <Card>
@@ -196,19 +196,19 @@ export default function SupplierDetailPage() {
     <div className="space-y-6">
       <div className="flex flex-wrap items-start justify-between gap-4">
         <div>
-          <Link href="/dashboard/suppliers" className="text-sm text-slate-500 hover:text-orange-400">
+          <Link href="/dashboard/suppliers" className="text-sm text-neutral-500 hover:text-red-400">
             ← Suppliers
           </Link>
           <div className="mt-2 flex flex-wrap items-center gap-3">
             <h1 className="text-xl font-semibold text-white">{supplier.name}</h1>
             {supplier.status && <Badge tone={verdictTone(supplier.status)}>{supplier.status}</Badge>}
           </div>
-          <p className="mt-1 text-sm text-slate-500">
+          <p className="mt-1 text-sm text-neutral-500">
             {supplier.contact_name || 'No contact'}
             {supplier.contact_email && (
               <>
                 {' · '}
-                <a href={`mailto:${supplier.contact_email}`} className="text-slate-400 hover:text-orange-400">
+                <a href={`mailto:${supplier.contact_email}`} className="text-neutral-400 hover:text-red-400">
                   {supplier.contact_email}
                 </a>
               </>
@@ -248,21 +248,21 @@ export default function SupplierDetailPage() {
                 <ScoreRow label="Contests won" value={scorecard.contests_won ?? 0} />
                 <div>
                   <div className="flex items-center justify-between text-sm">
-                    <span className="text-slate-400">Win rate</span>
+                    <span className="text-neutral-400">Win rate</span>
                     <span className="font-semibold text-white tabular-nums">{winRate}%</span>
                   </div>
-                  <div className="mt-2 h-2 overflow-hidden rounded-full bg-slate-800">
+                  <div className="mt-2 h-2 overflow-hidden rounded-full bg-neutral-800">
                     <div className="h-full rounded-full bg-emerald-500" style={{ width: `${winRate}%` }} />
                   </div>
                 </div>
                 <div>
                   <div className="flex items-center justify-between text-sm">
-                    <span className="text-slate-400">Behavior</span>
+                    <span className="text-neutral-400">Behavior</span>
                     <span className="font-semibold text-white tabular-nums">
                       {scorecard.behavior_score != null ? Math.round(scorecard.behavior_score) : 0}/100
                     </span>
                   </div>
-                  <div className="mt-2 h-2 overflow-hidden rounded-full bg-slate-800">
+                  <div className="mt-2 h-2 overflow-hidden rounded-full bg-neutral-800">
                     <div
                       className={`h-full rounded-full ${
                         (scorecard.behavior_score ?? 0) >= 70
@@ -276,18 +276,18 @@ export default function SupplierDetailPage() {
                   </div>
                 </div>
                 {scorecard.updated_at && (
-                  <p className="text-xs text-slate-600">Updated {fmtDate(scorecard.updated_at)}</p>
+                  <p className="text-xs text-neutral-600">Updated {fmtDate(scorecard.updated_at)}</p>
                 )}
               </>
             ) : (
-              <p className="text-sm text-slate-500">
+              <p className="text-sm text-neutral-500">
                 No scorecard yet. It is computed from this supplier&apos;s reviewed letters.
               </p>
             )}
             {supplier.notes && (
-              <div className="border-t border-slate-800 pt-4">
-                <div className="text-xs font-medium uppercase tracking-wide text-slate-500">Notes</div>
-                <p className="mt-1 whitespace-pre-wrap text-sm text-slate-300">{supplier.notes}</p>
+              <div className="border-t border-neutral-800 pt-4">
+                <div className="text-xs font-medium uppercase tracking-wide text-neutral-500">Notes</div>
+                <p className="mt-1 whitespace-pre-wrap text-sm text-neutral-300">{supplier.notes}</p>
               </div>
             )}
           </CardBody>
@@ -296,10 +296,10 @@ export default function SupplierDetailPage() {
         <Card className="lg:col-span-2">
           <CardHeader className="flex items-center justify-between">
             <h2 className="text-sm font-semibold text-white">Letter history</h2>
-            <div className="flex gap-4 text-xs text-slate-500">
+            <div className="flex gap-4 text-xs text-neutral-500">
               <span>{letters.length} letters</span>
               <span className="text-red-400">{stats.contested} breaches</span>
-              <span className="text-orange-400">avg {stats.avgPct.toFixed(1)}% ask</span>
+              <span className="text-red-400">avg {stats.avgPct.toFixed(1)}% ask</span>
             </div>
           </CardHeader>
           <CardBody className="p-0">
@@ -332,14 +332,14 @@ export default function SupplierDetailPage() {
                   {letters.map((l) => (
                     <TR key={l.id}>
                       <TD>
-                        <Link href={`/dashboard/letters/${l.id}`} className="font-medium text-white hover:text-orange-400">
+                        <Link href={`/dashboard/letters/${l.id}`} className="font-medium text-white hover:text-red-400">
                           {l.title || 'Untitled letter'}
                         </Link>
                         {l.defensibility_score != null && (
-                          <div className="text-xs text-slate-500">def. {Math.round(l.defensibility_score)}</div>
+                          <div className="text-xs text-neutral-500">def. {Math.round(l.defensibility_score)}</div>
                         )}
                       </TD>
-                      <TD className="text-right tabular-nums text-orange-400">
+                      <TD className="text-right tabular-nums text-red-400">
                         {l.proposed_pct != null ? `${l.proposed_pct.toFixed(1)}%` : '—'}
                       </TD>
                       <TD>{l.aggregate_verdict ? <Badge tone={verdictTone(l.aggregate_verdict)}>{l.aggregate_verdict}</Badge> : '—'}</TD>
@@ -426,21 +426,21 @@ export default function SupplierDetailPage() {
 function ScoreRow({ label, value }: { label: string; value: string | number }) {
   return (
     <div className="flex items-center justify-between text-sm">
-      <span className="text-slate-400">{label}</span>
+      <span className="text-neutral-400">{label}</span>
       <span className="font-semibold text-white tabular-nums">{value}</span>
     </div>
   )
 }
 
 const inputCls =
-  'w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-200 placeholder:text-slate-600 focus:border-orange-600 focus:outline-none'
+  'w-full rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-200 placeholder:text-neutral-600 focus:border-red-600 focus:outline-none'
 
 function Field({ label, required, children }: { label: string; required?: boolean; children: React.ReactNode }) {
   return (
     <label className="block">
-      <span className="mb-1 block text-xs font-medium uppercase tracking-wide text-slate-500">
+      <span className="mb-1 block text-xs font-medium uppercase tracking-wide text-neutral-500">
         {label}
-        {required && <span className="ml-1 text-orange-500">*</span>}
+        {required && <span className="ml-1 text-red-500">*</span>}
       </span>
       {children}
     </label>

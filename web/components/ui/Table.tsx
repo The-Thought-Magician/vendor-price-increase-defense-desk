@@ -2,7 +2,7 @@ import type { ReactNode } from 'react'
 
 export function Table({ children }: { children: ReactNode }) {
   return (
-    <div className="overflow-x-auto rounded-xl border border-slate-800">
+    <div className="overflow-x-auto rounded-xl border border-neutral-800">
       <table className="w-full min-w-full text-left text-sm">{children}</table>
     </div>
   )
@@ -10,18 +10,18 @@ export function Table({ children }: { children: ReactNode }) {
 
 export function THead({ children }: { children: ReactNode }) {
   return (
-    <thead className="border-b border-slate-800 bg-slate-900/80 text-xs uppercase tracking-wide text-slate-500">
+    <thead className="border-b border-neutral-800 bg-neutral-900/80 text-xs uppercase tracking-wide text-neutral-500">
       {children}
     </thead>
   )
 }
 
 export function TBody({ children }: { children: ReactNode }) {
-  return <tbody className="divide-y divide-slate-800/70">{children}</tbody>
+  return <tbody className="divide-y divide-neutral-800/70">{children}</tbody>
 }
 
 export function TR({ children, className = '' }: { children: ReactNode; className?: string }) {
-  return <tr className={`hover:bg-slate-900/50 ${className}`}>{children}</tr>
+  return <tr className={`hover:bg-neutral-900/50 ${className}`}>{children}</tr>
 }
 
 export function TH({ children, className = '' }: { children: ReactNode; className?: string }) {
@@ -29,5 +29,5 @@ export function TH({ children, className = '' }: { children: ReactNode; classNam
 }
 
 export function TD({ children, className = '' }: { children: ReactNode; className?: string }) {
-  return <td className={`px-4 py-3 text-slate-300 ${className}`}>{children}</td>
+  return <td className={`px-4 py-3 text-neutral-300 ${className}`}>{children}</td>
 }

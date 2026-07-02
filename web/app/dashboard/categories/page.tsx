@@ -214,7 +214,7 @@ export default function CategoriesPage() {
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div>
           <h1 className="text-2xl font-bold text-white">Category Taxonomy</h1>
-          <p className="mt-1 text-sm text-slate-500">
+          <p className="mt-1 text-sm text-neutral-500">
             Organise spend categories into a hierarchy. Suppliers, baselines and playbooks all hang off these.
           </p>
         </div>
@@ -240,7 +240,7 @@ export default function CategoriesPage() {
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Search categories…"
-            className="w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-200 placeholder:text-slate-600 focus:border-orange-500 focus:outline-none sm:w-72"
+            className="w-full rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-200 placeholder:text-neutral-600 focus:border-red-500 focus:outline-none sm:w-72"
           />
         </CardHeader>
         <CardBody className="p-0">
@@ -267,28 +267,28 @@ export default function CategoriesPage() {
               />
             </div>
           ) : (
-            <div className="divide-y divide-slate-800/70">
+            <div className="divide-y divide-neutral-800/70">
               {visible.map((n) => (
                 <div
                   key={n.id}
-                  className="flex items-center justify-between gap-3 px-4 py-3 hover:bg-slate-900/50"
+                  className="flex items-center justify-between gap-3 px-4 py-3 hover:bg-neutral-900/50"
                 >
                   <div className="min-w-0 flex items-center gap-2" style={{ paddingLeft: `${n.depth * 20}px` }}>
-                    {n.depth > 0 && <span className="text-slate-600">↳</span>}
+                    {n.depth > 0 && <span className="text-neutral-600">↳</span>}
                     <div className="min-w-0">
                       <div className="flex items-center gap-2">
-                        <span className="truncate font-medium text-slate-200">{n.name}</span>
+                        <span className="truncate font-medium text-neutral-200">{n.name}</span>
                         {(childCount.get(n.id) ?? 0) > 0 && (
                           <Badge tone="neutral">{childCount.get(n.id)} sub</Badge>
                         )}
                         {n.parent_id && (
-                          <span className="truncate text-xs text-slate-600">
+                          <span className="truncate text-xs text-neutral-600">
                             under {nameById.get(n.parent_id) ?? '—'}
                           </span>
                         )}
                       </div>
                       {n.description && (
-                        <div className="truncate text-xs text-slate-500">{n.description}</div>
+                        <div className="truncate text-xs text-neutral-500">{n.description}</div>
                       )}
                     </div>
                   </div>
@@ -332,22 +332,22 @@ export default function CategoriesPage() {
             </div>
           )}
           <div>
-            <label className="mb-1 block text-xs font-medium uppercase tracking-wide text-slate-500">Name</label>
+            <label className="mb-1 block text-xs font-medium uppercase tracking-wide text-neutral-500">Name</label>
             <input
               value={form.name}
               onChange={(e) => setForm({ ...form, name: e.target.value })}
               placeholder="e.g. IT & Software"
-              className="w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-200 placeholder:text-slate-600 focus:border-orange-500 focus:outline-none"
+              className="w-full rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-200 placeholder:text-neutral-600 focus:border-red-500 focus:outline-none"
             />
           </div>
           <div>
-            <label className="mb-1 block text-xs font-medium uppercase tracking-wide text-slate-500">
+            <label className="mb-1 block text-xs font-medium uppercase tracking-wide text-neutral-500">
               Parent category
             </label>
             <select
               value={form.parent_id}
               onChange={(e) => setForm({ ...form, parent_id: e.target.value })}
-              className="w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-200 focus:border-orange-500 focus:outline-none"
+              className="w-full rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-200 focus:border-red-500 focus:outline-none"
             >
               <option value="">— none (top level) —</option>
               {categories
@@ -361,7 +361,7 @@ export default function CategoriesPage() {
             </select>
           </div>
           <div>
-            <label className="mb-1 block text-xs font-medium uppercase tracking-wide text-slate-500">
+            <label className="mb-1 block text-xs font-medium uppercase tracking-wide text-neutral-500">
               Description
             </label>
             <textarea
@@ -369,7 +369,7 @@ export default function CategoriesPage() {
               onChange={(e) => setForm({ ...form, description: e.target.value })}
               rows={3}
               placeholder="Optional notes about what belongs in this category."
-              className="w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-200 placeholder:text-slate-600 focus:border-orange-500 focus:outline-none"
+              className="w-full rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-200 placeholder:text-neutral-600 focus:border-red-500 focus:outline-none"
             />
           </div>
         </div>

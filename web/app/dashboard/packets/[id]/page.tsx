@@ -265,7 +265,7 @@ export default function PacketBuilderPage() {
   if (error || !packet) {
     return (
       <div className="space-y-4">
-        <Link href="/dashboard/packets" className="text-sm text-slate-400 hover:text-orange-400">
+        <Link href="/dashboard/packets" className="text-sm text-neutral-400 hover:text-red-400">
           ← Back to packets
         </Link>
         <div className="rounded-lg border border-red-800/60 bg-red-950/40 px-4 py-3 text-sm text-red-300">
@@ -282,20 +282,20 @@ export default function PacketBuilderPage() {
   return (
     <div className="space-y-6">
       <div className="flex flex-col gap-3">
-        <Link href="/dashboard/packets" className="text-sm text-slate-400 hover:text-orange-400">
+        <Link href="/dashboard/packets" className="text-sm text-neutral-400 hover:text-red-400">
           ← Back to packets
         </Link>
         <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
           <div>
             <h1 className="text-2xl font-bold text-white">{packet.title || 'Untitled packet'}</h1>
-            <div className="mt-2 flex flex-wrap items-center gap-2 text-sm text-slate-400">
+            <div className="mt-2 flex flex-wrap items-center gap-2 text-sm text-neutral-400">
               <Badge tone={verdictTone(packet.status)}>{packet.status || 'draft'}</Badge>
               <Badge tone="blue">{packet.tone || 'neutral'}</Badge>
               {typeof packet.version === 'number' && <span>v{packet.version}</span>}
-              <Link href={`/dashboard/letters/${packet.letter_id}`} className="hover:text-orange-400">
+              <Link href={`/dashboard/letters/${packet.letter_id}`} className="hover:text-red-400">
                 View source letter →
               </Link>
-              {packet.updated_at && <span className="text-slate-600">Updated {fmtDate(packet.updated_at)}</span>}
+              {packet.updated_at && <span className="text-neutral-600">Updated {fmtDate(packet.updated_at)}</span>}
             </div>
           </div>
           <Button variant="danger" onClick={() => setDeleteOpen(true)}>
@@ -315,24 +315,24 @@ export default function PacketBuilderPage() {
         <div className="space-y-6 lg:col-span-2">
           <Card>
             <CardHeader className="flex items-center justify-between">
-              <h2 className="text-sm font-semibold uppercase tracking-wide text-slate-400">Packet Details</h2>
+              <h2 className="text-sm font-semibold uppercase tracking-wide text-neutral-400">Packet Details</h2>
             </CardHeader>
             <CardBody className="space-y-4">
               <div>
-                <label className="mb-1 block text-xs font-medium text-slate-500">Title</label>
+                <label className="mb-1 block text-xs font-medium text-neutral-500">Title</label>
                 <input
                   value={meta.title}
                   onChange={(e) => setMeta({ ...meta, title: e.target.value })}
-                  className="w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-200 focus:border-orange-500 focus:outline-none"
+                  className="w-full rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-200 focus:border-red-500 focus:outline-none"
                 />
               </div>
               <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
                 <div>
-                  <label className="mb-1 block text-xs font-medium text-slate-500">Tone</label>
+                  <label className="mb-1 block text-xs font-medium text-neutral-500">Tone</label>
                   <select
                     value={meta.tone}
                     onChange={(e) => setMeta({ ...meta, tone: e.target.value })}
-                    className="w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-200 focus:border-orange-500 focus:outline-none"
+                    className="w-full rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-200 focus:border-red-500 focus:outline-none"
                   >
                     {TONES.map((t) => (
                       <option key={t} value={t}>
@@ -342,11 +342,11 @@ export default function PacketBuilderPage() {
                   </select>
                 </div>
                 <div>
-                  <label className="mb-1 block text-xs font-medium text-slate-500">Status</label>
+                  <label className="mb-1 block text-xs font-medium text-neutral-500">Status</label>
                   <select
                     value={meta.status}
                     onChange={(e) => setMeta({ ...meta, status: e.target.value })}
-                    className="w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-200 focus:border-orange-500 focus:outline-none"
+                    className="w-full rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-200 focus:border-red-500 focus:outline-none"
                   >
                     {STATUSES.map((s) => (
                       <option key={s} value={s}>
@@ -356,25 +356,25 @@ export default function PacketBuilderPage() {
                   </select>
                 </div>
                 <div>
-                  <label className="mb-1 block text-xs font-medium text-slate-500">Counter %</label>
+                  <label className="mb-1 block text-xs font-medium text-neutral-500">Counter %</label>
                   <input
                     type="number"
                     step="0.1"
                     value={meta.recommended_counter_pct}
                     onChange={(e) => setMeta({ ...meta, recommended_counter_pct: e.target.value })}
                     placeholder="e.g. 3.5"
-                    className="w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-200 focus:border-orange-500 focus:outline-none"
+                    className="w-full rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-200 focus:border-red-500 focus:outline-none"
                   />
                 </div>
               </div>
               <div>
-                <label className="mb-1 block text-xs font-medium text-slate-500">Cover / opening body</label>
+                <label className="mb-1 block text-xs font-medium text-neutral-500">Cover / opening body</label>
                 <textarea
                   value={meta.body}
                   onChange={(e) => setMeta({ ...meta, body: e.target.value })}
                   rows={4}
                   placeholder="Opening narrative for the pushback letter…"
-                  className="w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-200 focus:border-orange-500 focus:outline-none"
+                  className="w-full rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-200 focus:border-red-500 focus:outline-none"
                 />
               </div>
               <div className="flex justify-end">
@@ -387,7 +387,7 @@ export default function PacketBuilderPage() {
 
           <Card>
             <CardHeader className="flex items-center justify-between">
-              <h2 className="text-sm font-semibold uppercase tracking-wide text-slate-400">
+              <h2 className="text-sm font-semibold uppercase tracking-wide text-neutral-400">
                 Sections ({sections.length})
               </h2>
               <Button size="sm" onClick={openNewSection}>
@@ -406,16 +406,16 @@ export default function PacketBuilderPage() {
                 sections.map((s, i) => (
                   <div
                     key={s.id}
-                    className="rounded-lg border border-slate-800 bg-slate-950/40 px-4 py-3"
+                    className="rounded-lg border border-neutral-800 bg-neutral-950/40 px-4 py-3"
                   >
                     <div className="flex items-start justify-between gap-3">
                       <div className="min-w-0">
                         <div className="flex flex-wrap items-center gap-2">
-                          <span className="text-sm font-semibold text-slate-100">{s.heading}</span>
+                          <span className="text-sm font-semibold text-neutral-100">{s.heading}</span>
                           {s.section_type && <Badge tone="neutral">{s.section_type}</Badge>}
                         </div>
-                        <p className="mt-1 whitespace-pre-wrap break-words text-sm text-slate-400">
-                          {s.content || <span className="italic text-slate-600">No content</span>}
+                        <p className="mt-1 whitespace-pre-wrap break-words text-sm text-neutral-400">
+                          {s.content || <span className="italic text-neutral-600">No content</span>}
                         </p>
                       </div>
                       <div className="flex shrink-0 flex-col items-end gap-1">
@@ -423,7 +423,7 @@ export default function PacketBuilderPage() {
                           <button
                             onClick={() => moveSection(i, -1)}
                             disabled={i === 0 || busySectionId === s.id}
-                            className="rounded px-1.5 py-0.5 text-slate-500 hover:bg-slate-800 hover:text-white disabled:opacity-30"
+                            className="rounded px-1.5 py-0.5 text-neutral-500 hover:bg-neutral-800 hover:text-white disabled:opacity-30"
                             aria-label="Move up"
                           >
                             ↑
@@ -431,7 +431,7 @@ export default function PacketBuilderPage() {
                           <button
                             onClick={() => moveSection(i, 1)}
                             disabled={i === sections.length - 1 || busySectionId === s.id}
-                            className="rounded px-1.5 py-0.5 text-slate-500 hover:bg-slate-800 hover:text-white disabled:opacity-30"
+                            className="rounded px-1.5 py-0.5 text-neutral-500 hover:bg-neutral-800 hover:text-white disabled:opacity-30"
                             aria-label="Move down"
                           >
                             ↓
@@ -464,15 +464,15 @@ export default function PacketBuilderPage() {
         <div className="space-y-6">
           <Card>
             <CardHeader>
-              <h2 className="text-sm font-semibold uppercase tracking-wide text-slate-400">Live Preview</h2>
+              <h2 className="text-sm font-semibold uppercase tracking-wide text-neutral-400">Live Preview</h2>
             </CardHeader>
             <CardBody>
               {fullPreview.trim() ? (
-                <pre className="max-h-[60vh] overflow-y-auto whitespace-pre-wrap break-words font-sans text-sm leading-relaxed text-slate-300">
+                <pre className="max-h-[60vh] overflow-y-auto whitespace-pre-wrap break-words font-sans text-sm leading-relaxed text-neutral-300">
                   {fullPreview}
                 </pre>
               ) : (
-                <p className="text-sm italic text-slate-600">
+                <p className="text-sm italic text-neutral-600">
                   The assembled packet will appear here as you add a body and sections.
                 </p>
               )}
@@ -499,11 +499,11 @@ export default function PacketBuilderPage() {
       >
         <div className="space-y-4">
           <div>
-            <label className="mb-1 block text-xs font-medium text-slate-500">Section type</label>
+            <label className="mb-1 block text-xs font-medium text-neutral-500">Section type</label>
             <select
               value={sectionForm.section_type}
               onChange={(e) => setSectionForm({ ...sectionForm, section_type: e.target.value })}
-              className="w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-200 focus:border-orange-500 focus:outline-none"
+              className="w-full rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-200 focus:border-red-500 focus:outline-none"
             >
               {SECTION_TYPES.map((t) => (
                 <option key={t} value={t}>
@@ -514,14 +514,14 @@ export default function PacketBuilderPage() {
           </div>
           {templates.length > 0 && (
             <div>
-              <label className="mb-1 block text-xs font-medium text-slate-500">Insert from rebuttal template</label>
+              <label className="mb-1 block text-xs font-medium text-neutral-500">Insert from rebuttal template</label>
               <select
                 defaultValue=""
                 onChange={(e) => {
                   if (e.target.value) applyTemplate(e.target.value)
                   e.target.value = ''
                 }}
-                className="w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-200 focus:border-orange-500 focus:outline-none"
+                className="w-full rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-200 focus:border-red-500 focus:outline-none"
               >
                 <option value="">Choose a template…</option>
                 {templates.map((t) => (
@@ -534,20 +534,20 @@ export default function PacketBuilderPage() {
             </div>
           )}
           <div>
-            <label className="mb-1 block text-xs font-medium text-slate-500">Heading</label>
+            <label className="mb-1 block text-xs font-medium text-neutral-500">Heading</label>
             <input
               value={sectionForm.heading}
               onChange={(e) => setSectionForm({ ...sectionForm, heading: e.target.value })}
-              className="w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-200 focus:border-orange-500 focus:outline-none"
+              className="w-full rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-200 focus:border-red-500 focus:outline-none"
             />
           </div>
           <div>
-            <label className="mb-1 block text-xs font-medium text-slate-500">Content</label>
+            <label className="mb-1 block text-xs font-medium text-neutral-500">Content</label>
             <textarea
               value={sectionForm.content}
               onChange={(e) => setSectionForm({ ...sectionForm, content: e.target.value })}
               rows={8}
-              className="w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-200 focus:border-orange-500 focus:outline-none"
+              className="w-full rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-200 focus:border-red-500 focus:outline-none"
             />
           </div>
         </div>
@@ -569,8 +569,8 @@ export default function PacketBuilderPage() {
           </>
         }
       >
-        <p className="text-sm text-slate-400">
-          This will permanently delete <span className="font-medium text-slate-200">{packet.title}</span> and all of its
+        <p className="text-sm text-neutral-400">
+          This will permanently delete <span className="font-medium text-neutral-200">{packet.title}</span> and all of its
           sections. This cannot be undone.
         </p>
       </Modal>

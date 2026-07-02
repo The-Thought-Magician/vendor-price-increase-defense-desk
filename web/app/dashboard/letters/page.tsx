@@ -191,7 +191,7 @@ export default function LettersPage() {
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div>
           <h1 className="text-2xl font-bold text-white">Increase Letters</h1>
-          <p className="mt-1 text-sm text-slate-400">
+          <p className="mt-1 text-sm text-neutral-400">
             Every supplier ask, scored for defensibility.
           </p>
         </div>
@@ -204,24 +204,24 @@ export default function LettersPage() {
       <Card>
         <CardBody className="flex flex-wrap items-end gap-3">
           <div className="flex-1 min-w-[200px]">
-            <label className="mb-1 block text-xs font-medium uppercase tracking-wide text-slate-500">
+            <label className="mb-1 block text-xs font-medium uppercase tracking-wide text-neutral-500">
               Search
             </label>
             <input
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Title or supplier..."
-              className="w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-200 placeholder:text-slate-600 focus:border-orange-500 focus:outline-none focus:ring-1 focus:ring-orange-500"
+              className="w-full rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-200 placeholder:text-neutral-600 focus:border-red-500 focus:outline-none focus:ring-1 focus:ring-red-500"
             />
           </div>
           <div className="min-w-[160px]">
-            <label className="mb-1 block text-xs font-medium uppercase tracking-wide text-slate-500">
+            <label className="mb-1 block text-xs font-medium uppercase tracking-wide text-neutral-500">
               Status
             </label>
             <select
               value={statusFilter}
               onChange={(e) => setStatusFilter(e.target.value)}
-              className="w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-200 focus:border-orange-500 focus:outline-none focus:ring-1 focus:ring-orange-500"
+              className="w-full rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-200 focus:border-red-500 focus:outline-none focus:ring-1 focus:ring-red-500"
             >
               <option value="">All statuses</option>
               {STATUSES.map((s) => (
@@ -232,13 +232,13 @@ export default function LettersPage() {
             </select>
           </div>
           <div className="min-w-[180px]">
-            <label className="mb-1 block text-xs font-medium uppercase tracking-wide text-slate-500">
+            <label className="mb-1 block text-xs font-medium uppercase tracking-wide text-neutral-500">
               Supplier
             </label>
             <select
               value={supplierFilter}
               onChange={(e) => setSupplierFilter(e.target.value)}
-              className="w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-200 focus:border-orange-500 focus:outline-none focus:ring-1 focus:ring-orange-500"
+              className="w-full rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-200 focus:border-red-500 focus:outline-none focus:ring-1 focus:ring-red-500"
             >
               <option value="">All suppliers</option>
               {suppliers.map((s) => (
@@ -271,8 +271,8 @@ export default function LettersPage() {
 
       {/* Bulk action bar */}
       {selected.size > 0 && (
-        <div className="flex flex-wrap items-center gap-3 rounded-lg border border-orange-800/50 bg-orange-950/30 px-4 py-3">
-          <span className="text-sm text-orange-200">{selected.size} selected</span>
+        <div className="flex flex-wrap items-center gap-3 rounded-lg border border-red-800/50 bg-red-950/30 px-4 py-3">
+          <span className="text-sm text-red-200">{selected.size} selected</span>
           <select
             disabled={busy}
             onChange={(e) => {
@@ -281,7 +281,7 @@ export default function LettersPage() {
               bulkStatus(v)
             }}
             defaultValue=""
-            className="rounded-lg border border-slate-700 bg-slate-950 px-3 py-1.5 text-sm text-slate-200 focus:border-orange-500 focus:outline-none"
+            className="rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-1.5 text-sm text-neutral-200 focus:border-red-500 focus:outline-none"
           >
             <option value="" disabled>
               Set status…
@@ -329,7 +329,7 @@ export default function LettersPage() {
                   type="checkbox"
                   checked={allChecked}
                   onChange={toggleAll}
-                  className="h-4 w-4 rounded border-slate-600 bg-slate-950 accent-orange-600"
+                  className="h-4 w-4 rounded border-neutral-600 bg-neutral-950 accent-red-600"
                   aria-label="Select all"
                 />
               </TH>
@@ -352,18 +352,18 @@ export default function LettersPage() {
                     type="checkbox"
                     checked={selected.has(l.id)}
                     onChange={() => toggle(l.id)}
-                    className="h-4 w-4 rounded border-slate-600 bg-slate-950 accent-orange-600"
+                    className="h-4 w-4 rounded border-neutral-600 bg-neutral-950 accent-red-600"
                     aria-label={`Select ${l.title || l.id}`}
                   />
                 </TD>
                 <TD>
                   <Link
                     href={`/dashboard/letters/${l.id}`}
-                    className="font-medium text-slate-100 hover:text-orange-400"
+                    className="font-medium text-neutral-100 hover:text-red-400"
                   >
                     {l.title || 'Untitled letter'}
                   </Link>
-                  <div className="text-xs text-slate-500">Received {fmtDate(l.received_date)}</div>
+                  <div className="text-xs text-neutral-500">Received {fmtDate(l.received_date)}</div>
                 </TD>
                 <TD>{(l.supplier_id && supplierName.get(l.supplier_id)) || '—'}</TD>
                 <TD className="tabular-nums">{fmtPct(l.proposed_pct)}</TD>
@@ -371,7 +371,7 @@ export default function LettersPage() {
                 <TD>
                   {l.defensibility_score != null ? (
                     <div className="flex items-center gap-2">
-                      <div className="h-1.5 w-16 overflow-hidden rounded-full bg-slate-800">
+                      <div className="h-1.5 w-16 overflow-hidden rounded-full bg-neutral-800">
                         <div
                           className={`h-full rounded-full ${
                             scoreTone(l.defensibility_score) === 'green'
@@ -383,12 +383,12 @@ export default function LettersPage() {
                           style={{ width: `${Math.max(0, Math.min(100, l.defensibility_score))}%` }}
                         />
                       </div>
-                      <span className="text-xs tabular-nums text-slate-400">
+                      <span className="text-xs tabular-nums text-neutral-400">
                         {Math.round(l.defensibility_score)}
                       </span>
                     </div>
                   ) : (
-                    <span className="text-xs text-slate-600">not run</span>
+                    <span className="text-xs text-neutral-600">not run</span>
                   )}
                 </TD>
                 <TD>
@@ -401,7 +401,7 @@ export default function LettersPage() {
                 <TD>
                   <Badge tone={verdictTone(l.status)}>{l.status || 'new'}</Badge>
                 </TD>
-                <TD className="text-xs text-slate-400">{fmtDate(l.effective_date)}</TD>
+                <TD className="text-xs text-neutral-400">{fmtDate(l.effective_date)}</TD>
                 <TD className="text-right">
                   <div className="flex justify-end gap-2">
                     <Link href={`/dashboard/letters/${l.id}`}>

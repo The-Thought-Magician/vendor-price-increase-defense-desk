@@ -185,7 +185,7 @@ export default function SuppliersPage() {
       <div className="flex flex-wrap items-center justify-between gap-4">
         <div>
           <h1 className="text-xl font-semibold text-white">Suppliers</h1>
-          <p className="mt-1 text-sm text-slate-500">Vendor roster with negotiation scorecards.</p>
+          <p className="mt-1 text-sm text-neutral-500">Vendor roster with negotiation scorecards.</p>
         </div>
         <Button onClick={openCreate}>+ New supplier</Button>
       </div>
@@ -205,12 +205,12 @@ export default function SuppliersPage() {
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Search name or contact..."
-            className="min-w-[200px] flex-1 rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-200 placeholder:text-slate-600 focus:border-orange-600 focus:outline-none"
+            className="min-w-[200px] flex-1 rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-200 placeholder:text-neutral-600 focus:border-red-600 focus:outline-none"
           />
           <select
             value={categoryFilter}
             onChange={(e) => setCategoryFilter(e.target.value)}
-            className="rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-200 focus:border-orange-600 focus:outline-none"
+            className="rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-200 focus:border-red-600 focus:outline-none"
           >
             <option value="">All categories</option>
             {categories.map((c) => (
@@ -222,7 +222,7 @@ export default function SuppliersPage() {
           <select
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value)}
-            className="rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-200 focus:border-orange-600 focus:outline-none"
+            className="rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-200 focus:border-red-600 focus:outline-none"
           >
             <option value="">All statuses</option>
             {statuses.map((s) => (
@@ -290,10 +290,10 @@ export default function SuppliersPage() {
               return (
                 <TR key={s.id}>
                   <TD>
-                    <Link href={`/dashboard/suppliers/${s.id}`} className="font-medium text-white hover:text-orange-400">
+                    <Link href={`/dashboard/suppliers/${s.id}`} className="font-medium text-white hover:text-red-400">
                       {s.name}
                     </Link>
-                    {s.contact_name && <div className="text-xs text-slate-500">{s.contact_name}</div>}
+                    {s.contact_name && <div className="text-xs text-neutral-500">{s.contact_name}</div>}
                   </TD>
                   <TD>{s.category_id ? categoryName[s.category_id] ?? '—' : '—'}</TD>
                   <TD>
@@ -427,14 +427,14 @@ export default function SuppliersPage() {
 }
 
 const inputCls =
-  'w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-200 placeholder:text-slate-600 focus:border-orange-600 focus:outline-none'
+  'w-full rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-200 placeholder:text-neutral-600 focus:border-red-600 focus:outline-none'
 
 function Field({ label, required, children }: { label: string; required?: boolean; children: React.ReactNode }) {
   return (
     <label className="block">
-      <span className="mb-1 block text-xs font-medium uppercase tracking-wide text-slate-500">
+      <span className="mb-1 block text-xs font-medium uppercase tracking-wide text-neutral-500">
         {label}
-        {required && <span className="ml-1 text-orange-500">*</span>}
+        {required && <span className="ml-1 text-red-500">*</span>}
       </span>
       {children}
     </label>

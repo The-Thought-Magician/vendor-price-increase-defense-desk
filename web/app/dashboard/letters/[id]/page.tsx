@@ -284,7 +284,7 @@ export default function LetterWorkspacePage() {
   if (error || !letter) {
     return (
       <div className="space-y-4">
-        <Link href="/dashboard/letters" className="text-sm text-slate-500 hover:text-orange-400">
+        <Link href="/dashboard/letters" className="text-sm text-neutral-500 hover:text-red-400">
           ← Letters
         </Link>
         <Card>
@@ -308,23 +308,23 @@ export default function LetterWorkspacePage() {
       {/* header */}
       <div className="flex flex-wrap items-start justify-between gap-4">
         <div>
-          <Link href="/dashboard/letters" className="text-sm text-slate-500 hover:text-orange-400">
+          <Link href="/dashboard/letters" className="text-sm text-neutral-500 hover:text-red-400">
             ← Letters
           </Link>
           <div className="mt-2 flex flex-wrap items-center gap-3">
             <h1 className="text-xl font-semibold text-white">{letter.title || 'Untitled letter'}</h1>
             {letter.aggregate_verdict && <Badge tone={verdictTone(letter.aggregate_verdict)}>{letter.aggregate_verdict}</Badge>}
           </div>
-          <p className="mt-1 text-sm text-slate-500">
+          <p className="mt-1 text-sm text-neutral-500">
             Proposed{' '}
-            <span className="font-medium text-orange-400">
+            <span className="font-medium text-red-400">
               {letter.proposed_pct != null ? `${letter.proposed_pct.toFixed(1)}%` : '—'}
             </span>{' '}
             · received {fmtDate(letter.received_date)} · effective {fmtDate(letter.effective_date)}
             {letter.supplier_id && (
               <>
                 {' · '}
-                <Link href={`/dashboard/suppliers/${letter.supplier_id}`} className="text-slate-400 hover:text-orange-400">
+                <Link href={`/dashboard/suppliers/${letter.supplier_id}`} className="text-neutral-400 hover:text-red-400">
                   supplier
                 </Link>
               </>
@@ -336,7 +336,7 @@ export default function LetterWorkspacePage() {
             value={letter.status ?? ''}
             onChange={(e) => changeStatus(e.target.value)}
             disabled={busy === 'status'}
-            className="rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-200 focus:border-orange-600 focus:outline-none"
+            className="rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-200 focus:border-red-600 focus:outline-none"
           >
             {!letter.status && <option value="">Set status...</option>}
             {STATUSES.map((s) => (
@@ -375,15 +375,15 @@ export default function LetterWorkspacePage() {
       </div>
 
       {/* tabs */}
-      <div className="flex flex-wrap gap-1 border-b border-slate-800">
+      <div className="flex flex-wrap gap-1 border-b border-neutral-800">
         {TABS.map((t) => (
           <button
             key={t}
             onClick={() => setTab(t)}
             className={`-mb-px border-b-2 px-4 py-2 text-sm font-medium transition-colors ${
               tab === t
-                ? 'border-orange-500 text-white'
-                : 'border-transparent text-slate-500 hover:text-slate-300'
+                ? 'border-red-500 text-white'
+                : 'border-transparent text-neutral-500 hover:text-neutral-300'
             }`}
           >
             {t}
@@ -484,7 +484,7 @@ function AnalysisTab({
         <CardHeader className="flex items-center justify-between">
           <div>
             <h2 className="text-sm font-semibold text-white">Clause checks</h2>
-            <p className="text-xs text-slate-500">Validate against contract caps, notice, and fixed-period terms.</p>
+            <p className="text-xs text-neutral-500">Validate against contract caps, notice, and fixed-period terms.</p>
           </div>
           <Button size="sm" onClick={onRunChecks} disabled={busy === 'checks'}>
             {busy === 'checks' ? <Spinner className="h-4 w-4" /> : 'Run clause checks'}
@@ -515,7 +515,7 @@ function AnalysisTab({
                     <TD>{c.severity ? <Badge tone={sevTone(c.severity)}>{c.severity}</Badge> : '—'}</TD>
                     <TD className="tabular-nums">{c.expected_value ?? '—'}</TD>
                     <TD className="tabular-nums">{c.actual_value ?? '—'}</TD>
-                    <TD className="max-w-xs text-xs text-slate-400">{c.detail ?? c.citation_text ?? '—'}</TD>
+                    <TD className="max-w-xs text-xs text-neutral-400">{c.detail ?? c.citation_text ?? '—'}</TD>
                   </TR>
                 ))}
               </TBody>
@@ -529,7 +529,7 @@ function AnalysisTab({
         <CardHeader className="flex items-center justify-between">
           <div>
             <h2 className="text-sm font-semibold text-white">Index validation</h2>
-            <p className="text-xs text-slate-500">Check the claimed increase against the contractual index movement.</p>
+            <p className="text-xs text-neutral-500">Check the claimed increase against the contractual index movement.</p>
           </div>
           <Button size="sm" onClick={() => setValOpen(true)} disabled={busy === 'validate'}>
             {busy === 'validate' ? <Spinner className="h-4 w-4" /> : 'Run validation'}
@@ -556,13 +556,13 @@ function AnalysisTab({
                   <TR key={v.id}>
                     <TD className="text-xs">
                       {v.base_period || '?'} → {v.current_period || '?'}
-                      {v.detail && <div className="text-slate-500">{v.detail}</div>}
+                      {v.detail && <div className="text-neutral-500">{v.detail}</div>}
                     </TD>
                     <TD className="text-right tabular-nums">{v.actual_pct != null ? `${v.actual_pct.toFixed(1)}%` : '—'}</TD>
                     <TD className="text-right tabular-nums text-emerald-400">
                       {v.entitled_pct != null ? `${v.entitled_pct.toFixed(1)}%` : '—'}
                     </TD>
-                    <TD className="text-right tabular-nums text-orange-400">
+                    <TD className="text-right tabular-nums text-red-400">
                       {v.claimed_pct != null ? `${v.claimed_pct.toFixed(1)}%` : '—'}
                     </TD>
                     <TD className="text-right tabular-nums">
@@ -588,7 +588,7 @@ function AnalysisTab({
         <CardHeader className="flex items-center justify-between">
           <div>
             <h2 className="text-sm font-semibold text-white">Cumulative creep</h2>
-            <p className="text-xs text-slate-500">
+            <p className="text-xs text-neutral-500">
               {letter.contract_id ? 'Stacked increases across the contract vs the cumulative cap.' : 'No contract linked to this letter.'}
             </p>
           </div>
@@ -618,11 +618,11 @@ function AnalysisTab({
             <h2 className="text-sm font-semibold text-white">Supplier justification</h2>
           </CardHeader>
           <CardBody className="space-y-3">
-            {letter.justification && <p className="whitespace-pre-wrap text-sm text-slate-300">{letter.justification}</p>}
+            {letter.justification && <p className="whitespace-pre-wrap text-sm text-neutral-300">{letter.justification}</p>}
             {letter.raw_text && (
               <details className="text-sm">
-                <summary className="cursor-pointer text-slate-500 hover:text-slate-300">Raw letter text</summary>
-                <p className="mt-2 whitespace-pre-wrap text-xs text-slate-400">{letter.raw_text}</p>
+                <summary className="cursor-pointer text-neutral-500 hover:text-neutral-300">Raw letter text</summary>
+                <p className="mt-2 whitespace-pre-wrap text-xs text-neutral-400">{letter.raw_text}</p>
               </details>
             )}
           </CardBody>
@@ -699,28 +699,28 @@ function CreepChart({ record }: { record: CreepRecord }) {
   const max = Math.max(cap, record.cumulative_pct ?? 0, ...timeline.map((t) => t.pct ?? 0), 1)
   return (
     <div>
-      <div className="flex items-end gap-3 border-l border-b border-slate-800 px-3 pt-2" style={{ height: 160 }}>
+      <div className="flex items-end gap-3 border-l border-b border-neutral-800 px-3 pt-2" style={{ height: 160 }}>
         {timeline.map((t, i) => {
           const pct = t.pct ?? 0
           const h = (pct / max) * 130
           const overCap = cap > 0 && pct > cap
           return (
             <div key={i} className="flex flex-1 flex-col items-center justify-end gap-1">
-              <span className="text-[10px] tabular-nums text-slate-400">{pct.toFixed(1)}%</span>
+              <span className="text-[10px] tabular-nums text-neutral-400">{pct.toFixed(1)}%</span>
               <div
-                className={`w-full max-w-[40px] rounded-t ${overCap ? 'bg-red-500' : 'bg-orange-500'}`}
+                className={`w-full max-w-[40px] rounded-t ${overCap ? 'bg-red-500' : 'bg-red-500'}`}
                 style={{ height: Math.max(2, h) }}
                 title={`${t.label ?? t.period ?? ''}: ${pct.toFixed(1)}%`}
               />
-              <span className="truncate text-[10px] text-slate-600">{t.period ?? t.label ?? i + 1}</span>
+              <span className="truncate text-[10px] text-neutral-600">{t.period ?? t.label ?? i + 1}</span>
             </div>
           )
         })}
       </div>
       {cap > 0 && (
-        <div className="mt-2 flex items-center gap-2 text-xs text-slate-500">
+        <div className="mt-2 flex items-center gap-2 text-xs text-neutral-500">
           <span className="inline-block h-2 w-4 rounded bg-red-500" /> over cap ({cap.toFixed(1)}%)
-          <span className="ml-3 inline-block h-2 w-4 rounded bg-orange-500" /> within cap
+          <span className="ml-3 inline-block h-2 w-4 rounded bg-red-500" /> within cap
         </div>
       )}
     </div>
@@ -826,7 +826,7 @@ function LineItemsTab({
                       <TD>{i.description ?? '—'}</TD>
                       <TD className="text-right tabular-nums">{money(i.current_price_cents)}</TD>
                       <TD className="text-right tabular-nums">{money(i.proposed_price_cents)}</TD>
-                      <TD className="text-right tabular-nums text-orange-400">
+                      <TD className="text-right tabular-nums text-red-400">
                         {i.proposed_pct != null ? `${i.proposed_pct.toFixed(1)}%` : '—'}
                       </TD>
                       <TD className="text-right tabular-nums">{i.annual_volume?.toLocaleString() ?? '—'}</TD>
@@ -841,15 +841,15 @@ function LineItemsTab({
                 })}
               </TBody>
             </Table>
-            <div className="flex flex-wrap justify-end gap-6 border-t border-slate-800 px-4 py-3 text-sm">
-              <span className="text-slate-500">
-                Current annual: <span className="tabular-nums text-slate-300">{money(totals.current)}</span>
+            <div className="flex flex-wrap justify-end gap-6 border-t border-neutral-800 px-4 py-3 text-sm">
+              <span className="text-neutral-500">
+                Current annual: <span className="tabular-nums text-neutral-300">{money(totals.current)}</span>
               </span>
-              <span className="text-slate-500">
-                Proposed annual: <span className="tabular-nums text-slate-300">{money(totals.proposed)}</span>
+              <span className="text-neutral-500">
+                Proposed annual: <span className="tabular-nums text-neutral-300">{money(totals.proposed)}</span>
               </span>
-              <span className="text-slate-500">
-                Annual increase: <span className="tabular-nums text-orange-400">{money(totals.delta)}</span>
+              <span className="text-neutral-500">
+                Annual increase: <span className="tabular-nums text-red-400">{money(totals.delta)}</span>
               </span>
             </div>
           </>
@@ -923,7 +923,7 @@ function ScenariosTab({ scenarios, busy, onModel }: { scenarios: Scenario[]; bus
       <CardHeader className="flex items-center justify-between">
         <div>
           <h2 className="text-sm font-semibold text-white">Counter-offer scenarios</h2>
-          <p className="text-xs text-slate-500">Model accept / capped / indexed / reject outcomes.</p>
+          <p className="text-xs text-neutral-500">Model accept / capped / indexed / reject outcomes.</p>
         </div>
         <Button size="sm" onClick={onModel} disabled={busy}>
           {busy ? <Spinner className="h-4 w-4" /> : 'Model scenarios'}
@@ -940,19 +940,19 @@ function ScenariosTab({ scenarios, busy, onModel }: { scenarios: Scenario[]; bus
               <div
                 key={s.id}
                 className={`rounded-xl border p-4 ${
-                  s.is_recommended ? 'border-orange-700/70 bg-orange-950/20' : 'border-slate-800 bg-slate-900/40'
+                  s.is_recommended ? 'border-red-700/70 bg-red-950/20' : 'border-neutral-800 bg-neutral-900/40'
                 }`}
               >
                 <div className="flex items-center justify-between">
                   <h3 className="text-sm font-semibold text-white">{s.name || s.scenario_type}</h3>
                   {s.is_recommended && <Badge tone="orange">Recommended</Badge>}
                 </div>
-                {s.scenario_type && <div className="mt-1 text-xs text-slate-500">{s.scenario_type}</div>}
+                {s.scenario_type && <div className="mt-1 text-xs text-neutral-500">{s.scenario_type}</div>}
                 <div className="mt-3 text-2xl font-bold tabular-nums text-white">
                   {s.applied_pct != null ? `${s.applied_pct.toFixed(1)}%` : '—'}
                 </div>
-                <div className="mt-1 text-sm text-orange-400 tabular-nums">{money(s.annual_impact_cents)} / yr</div>
-                {s.detail && <p className="mt-2 text-xs text-slate-400">{s.detail}</p>}
+                <div className="mt-1 text-sm text-red-400 tabular-nums">{money(s.annual_impact_cents)} / yr</div>
+                {s.detail && <p className="mt-2 text-xs text-neutral-400">{s.detail}</p>}
               </div>
             ))}
           </div>
@@ -1013,22 +1013,22 @@ function CommentsTab({
         ) : (
           <ul className="space-y-3">
             {comments.map((c) => (
-              <li key={c.id} className="rounded-lg border border-slate-800 bg-slate-900/40 px-4 py-3">
+              <li key={c.id} className="rounded-lg border border-neutral-800 bg-neutral-900/40 px-4 py-3">
                 <div className="flex items-center justify-between">
                   <span className="text-sm font-medium text-white">{c.author || 'Anonymous'}</span>
                   <div className="flex items-center gap-3">
-                    <span className="text-xs text-slate-600">{fmtDate(c.created_at)}</span>
-                    <button onClick={() => remove(c.id)} className="text-xs text-slate-600 hover:text-red-400">
+                    <span className="text-xs text-neutral-600">{fmtDate(c.created_at)}</span>
+                    <button onClick={() => remove(c.id)} className="text-xs text-neutral-600 hover:text-red-400">
                       delete
                     </button>
                   </div>
                 </div>
-                <p className="mt-1 whitespace-pre-wrap text-sm text-slate-300">{c.body}</p>
+                <p className="mt-1 whitespace-pre-wrap text-sm text-neutral-300">{c.body}</p>
               </li>
             ))}
           </ul>
         )}
-        <div className="space-y-2 border-t border-slate-800 pt-4">
+        <div className="space-y-2 border-t border-neutral-800 pt-4">
           <input
             value={author}
             onChange={(e) => setAuthor(e.target.value)}
@@ -1108,7 +1108,7 @@ function DocumentsTab({
       <CardHeader className="flex items-center justify-between">
         <div>
           <h2 className="text-sm font-semibold text-white">Documents &amp; snippets</h2>
-          <p className="text-xs text-slate-500">Attach evidence, quotes, and supporting files.</p>
+          <p className="text-xs text-neutral-500">Attach evidence, quotes, and supporting files.</p>
         </div>
         <Button size="sm" onClick={() => setOpen(true)}>
           + Add document
@@ -1119,19 +1119,19 @@ function DocumentsTab({
           <EmptyState icon="📎" title="No documents" description="Attach snippets or links to back up your pushback." />
         ) : (
           documents.map((d) => (
-            <div key={d.id} className="rounded-lg border border-slate-800 bg-slate-900/40 px-4 py-3">
+            <div key={d.id} className="rounded-lg border border-neutral-800 bg-neutral-900/40 px-4 py-3">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
                   <span className="text-sm font-medium text-white">{d.name}</span>
                   {d.doc_type && <Badge tone="blue">{d.doc_type}</Badge>}
                 </div>
-                <button onClick={() => remove(d.id)} className="text-xs text-slate-600 hover:text-red-400">
+                <button onClick={() => remove(d.id)} className="text-xs text-neutral-600 hover:text-red-400">
                   delete
                 </button>
               </div>
-              {d.content && <p className="mt-2 whitespace-pre-wrap text-xs text-slate-400">{d.content}</p>}
+              {d.content && <p className="mt-2 whitespace-pre-wrap text-xs text-neutral-400">{d.content}</p>}
               {d.url && (
-                <a href={d.url} target="_blank" rel="noreferrer" className="mt-1 inline-block text-xs text-orange-400 hover:underline">
+                <a href={d.url} target="_blank" rel="noreferrer" className="mt-1 inline-block text-xs text-red-400 hover:underline">
                   {d.url}
                 </a>
               )}
@@ -1212,10 +1212,10 @@ function PacketTab({ letterId, onErr, onOk }: { letterId: string; onErr: (m: str
       <CardHeader className="flex flex-wrap items-center justify-between gap-3">
         <div>
           <h2 className="text-sm font-semibold text-white">Pushback packet</h2>
-          <p className="text-xs text-slate-500">Generate a negotiation packet from checks, validations, and creep.</p>
+          <p className="text-xs text-neutral-500">Generate a negotiation packet from checks, validations, and creep.</p>
         </div>
         <div className="flex items-center gap-2">
-          <select value={tone} onChange={(e) => setTone(e.target.value)} className="rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-200 focus:border-orange-600 focus:outline-none">
+          <select value={tone} onChange={(e) => setTone(e.target.value)} className="rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-200 focus:border-red-600 focus:outline-none">
             <option value="firm">firm</option>
             <option value="collaborative">collaborative</option>
             <option value="formal">formal</option>
@@ -1235,21 +1235,21 @@ function PacketTab({ letterId, onErr, onOk }: { letterId: string; onErr: (m: str
               {packet.tone && <Badge tone="blue">{packet.tone}</Badge>}
               {packet.status && <Badge tone={verdictTone(packet.status)}>{packet.status}</Badge>}
               {packet.recommended_counter_pct != null && (
-                <span className="text-sm text-slate-400">
-                  recommended counter <span className="font-medium text-orange-400">{packet.recommended_counter_pct.toFixed(1)}%</span>
+                <span className="text-sm text-neutral-400">
+                  recommended counter <span className="font-medium text-red-400">{packet.recommended_counter_pct.toFixed(1)}%</span>
                 </span>
               )}
             </div>
-            {packet.body && <p className="whitespace-pre-wrap text-sm text-slate-300">{packet.body}</p>}
+            {packet.body && <p className="whitespace-pre-wrap text-sm text-neutral-300">{packet.body}</p>}
             {sections.length > 0 && (
               <div className="space-y-3">
                 {sections.map((s) => (
-                  <div key={s.id} className="rounded-lg border border-slate-800 bg-slate-900/40 px-4 py-3">
+                  <div key={s.id} className="rounded-lg border border-neutral-800 bg-neutral-900/40 px-4 py-3">
                     <div className="flex items-center gap-2">
                       <span className="text-sm font-medium text-white">{s.heading || s.section_type}</span>
                       {s.section_type && <Badge tone="neutral">{s.section_type}</Badge>}
                     </div>
-                    {s.content && <p className="mt-2 whitespace-pre-wrap text-sm text-slate-400">{s.content}</p>}
+                    {s.content && <p className="mt-2 whitespace-pre-wrap text-sm text-neutral-400">{s.content}</p>}
                   </div>
                 ))}
               </div>
@@ -1310,7 +1310,7 @@ function ApprovalButton({ letterId, onDone, onErr }: { letterId: string; onDone:
         }
       >
         <div className="space-y-4">
-          <p className="text-sm text-slate-400">
+          <p className="text-sm text-neutral-400">
             Route this letter through your approval chain before accepting or contesting the increase.
           </p>
           <FieldLite label="Decision note">
@@ -1329,14 +1329,14 @@ function ApprovalButton({ letterId, onDone, onErr }: { letterId: string; onDone:
 
 // ---------- shared ----------
 const inputCls =
-  'w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-200 placeholder:text-slate-600 focus:border-orange-600 focus:outline-none'
+  'w-full rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-200 placeholder:text-neutral-600 focus:border-red-600 focus:outline-none'
 
 function FieldLite({ label, required, children }: { label: string; required?: boolean; children: React.ReactNode }) {
   return (
     <label className="block">
-      <span className="mb-1 block text-xs font-medium uppercase tracking-wide text-slate-500">
+      <span className="mb-1 block text-xs font-medium uppercase tracking-wide text-neutral-500">
         {label}
-        {required && <span className="ml-1 text-orange-500">*</span>}
+        {required && <span className="ml-1 text-red-500">*</span>}
       </span>
       {children}
     </label>

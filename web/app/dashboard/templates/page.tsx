@@ -157,7 +157,7 @@ export default function TemplatesPage() {
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h1 className="text-2xl font-bold text-white">Rebuttal Templates</h1>
-          <p className="mt-1 text-sm text-slate-400">
+          <p className="mt-1 text-sm text-neutral-400">
             Reusable argument blocks keyed by breach type and tone. Pulled into packets when you push back.
           </p>
         </div>
@@ -180,12 +180,12 @@ export default function TemplatesPage() {
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Search templates…"
-              className="w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-200 placeholder-slate-600 focus:border-orange-500 focus:outline-none sm:max-w-sm"
+              className="w-full rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-200 placeholder-neutral-600 focus:border-red-500 focus:outline-none sm:max-w-sm"
             />
             <select
               value={breachFilter}
               onChange={(e) => setBreachFilter(e.target.value)}
-              className="rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-200 focus:border-orange-500 focus:outline-none"
+              className="rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-200 focus:border-red-500 focus:outline-none"
             >
               <option value="all">All breach types</option>
               {breachTypes.map((b) => (
@@ -194,7 +194,7 @@ export default function TemplatesPage() {
                 </option>
               ))}
             </select>
-            <div className="text-xs text-slate-500 sm:ml-auto">
+            <div className="text-xs text-neutral-500 sm:ml-auto">
               {filtered.length} of {templates.length} shown
             </div>
           </div>
@@ -221,18 +221,18 @@ export default function TemplatesPage() {
           ) : (
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
               {filtered.map((t) => (
-                <div key={t.id} className="flex flex-col rounded-xl border border-slate-800 bg-slate-950/40 p-4">
+                <div key={t.id} className="flex flex-col rounded-xl border border-neutral-800 bg-neutral-950/40 p-4">
                   <div className="flex items-start justify-between gap-2">
-                    <h3 className="font-semibold text-slate-100">{t.name}</h3>
+                    <h3 className="font-semibold text-neutral-100">{t.name}</h3>
                     <div className="flex shrink-0 gap-1.5">
                       {t.breach_type && <Badge tone="orange">{t.breach_type}</Badge>}
                       {t.tone && <Badge tone="blue">{t.tone}</Badge>}
                     </div>
                   </div>
-                  <p className="mt-3 line-clamp-5 whitespace-pre-wrap break-words text-sm text-slate-400">
+                  <p className="mt-3 line-clamp-5 whitespace-pre-wrap break-words text-sm text-neutral-400">
                     {t.body}
                   </p>
-                  <div className="mt-4 flex justify-end gap-1 border-t border-slate-800/70 pt-3">
+                  <div className="mt-4 flex justify-end gap-1 border-t border-neutral-800/70 pt-3">
                     <Button variant="ghost" size="sm" onClick={() => openEdit(t)}>
                       Edit
                     </Button>
@@ -275,21 +275,21 @@ export default function TemplatesPage() {
             </div>
           )}
           <div>
-            <label className="mb-1 block text-xs font-medium text-slate-500">Name</label>
+            <label className="mb-1 block text-xs font-medium text-neutral-500">Name</label>
             <input
               value={form.name}
               onChange={(e) => setForm({ ...form, name: e.target.value })}
               placeholder="e.g. Cap-exceeded firm rebuttal"
-              className="w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-200 focus:border-orange-500 focus:outline-none"
+              className="w-full rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-200 focus:border-red-500 focus:outline-none"
             />
           </div>
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="mb-1 block text-xs font-medium text-slate-500">Breach type</label>
+              <label className="mb-1 block text-xs font-medium text-neutral-500">Breach type</label>
               <select
                 value={form.breach_type}
                 onChange={(e) => setForm({ ...form, breach_type: e.target.value })}
-                className="w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-200 focus:border-orange-500 focus:outline-none"
+                className="w-full rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-200 focus:border-red-500 focus:outline-none"
               >
                 {BREACH_TYPES.map((b) => (
                   <option key={b} value={b}>
@@ -299,11 +299,11 @@ export default function TemplatesPage() {
               </select>
             </div>
             <div>
-              <label className="mb-1 block text-xs font-medium text-slate-500">Tone</label>
+              <label className="mb-1 block text-xs font-medium text-neutral-500">Tone</label>
               <select
                 value={form.tone}
                 onChange={(e) => setForm({ ...form, tone: e.target.value })}
-                className="w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-200 focus:border-orange-500 focus:outline-none"
+                className="w-full rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-200 focus:border-red-500 focus:outline-none"
               >
                 {TONES.map((t) => (
                   <option key={t} value={t}>
@@ -314,15 +314,15 @@ export default function TemplatesPage() {
             </div>
           </div>
           <div>
-            <label className="mb-1 block text-xs font-medium text-slate-500">Body</label>
+            <label className="mb-1 block text-xs font-medium text-neutral-500">Body</label>
             <textarea
               value={form.body}
               onChange={(e) => setForm({ ...form, body: e.target.value })}
               rows={9}
               placeholder="Use placeholders like {{supplier}}, {{cap_pct}}, {{proposed_pct}} that packet generation can fill…"
-              className="w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-200 focus:border-orange-500 focus:outline-none"
+              className="w-full rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-200 focus:border-red-500 focus:outline-none"
             />
-            <p className="mt-1 text-xs text-slate-600">
+            <p className="mt-1 text-xs text-neutral-600">
               Reference contract values with placeholders; packet generation substitutes them per letter.
             </p>
           </div>
@@ -345,8 +345,8 @@ export default function TemplatesPage() {
           </>
         }
       >
-        <p className="text-sm text-slate-400">
-          Delete <span className="font-medium text-slate-200">{deleteTarget?.name}</span>? This cannot be undone.
+        <p className="text-sm text-neutral-400">
+          Delete <span className="font-medium text-neutral-200">{deleteTarget?.name}</span>? This cannot be undone.
         </p>
       </Modal>
     </div>

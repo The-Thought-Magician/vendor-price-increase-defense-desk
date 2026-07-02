@@ -181,15 +181,15 @@ export default function ContractsPage() {
     }
   }
 
-  const field = 'w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-100 placeholder:text-slate-600 focus:border-orange-500 focus:outline-none'
-  const label = 'mb-1 block text-xs font-medium uppercase tracking-wide text-slate-500'
+  const field = 'w-full rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-100 placeholder:text-neutral-600 focus:border-red-500 focus:outline-none'
+  const label = 'mb-1 block text-xs font-medium uppercase tracking-wide text-neutral-500'
 
   return (
     <div className="space-y-6">
       <div className="flex flex-wrap items-center justify-between gap-4">
         <div>
           <h1 className="text-2xl font-bold text-white">Contracts</h1>
-          <p className="mt-1 text-sm text-slate-500">
+          <p className="mt-1 text-sm text-neutral-500">
             Master agreements, escalation caps, and governing terms behind every price-increase fight.
           </p>
         </div>
@@ -228,7 +228,7 @@ export default function ContractsPage() {
               Clear
             </Button>
           )}
-          <span className="ml-auto text-xs text-slate-500">{filtered.length} of {contracts.length}</span>
+          <span className="ml-auto text-xs text-neutral-500">{filtered.length} of {contracts.length}</span>
         </CardBody>
       </Card>
 
@@ -274,19 +274,19 @@ export default function ContractsPage() {
               return (
                 <TR key={c.id}>
                   <TD>
-                    <Link href={`/dashboard/contracts/${c.id}`} className="font-medium text-slate-100 hover:text-orange-400">
+                    <Link href={`/dashboard/contracts/${c.id}`} className="font-medium text-neutral-100 hover:text-red-400">
                       {c.name}
                     </Link>
-                    <div className="text-xs text-slate-500">
+                    <div className="text-xs text-neutral-500">
                       {c.governing_entity || 'No governing entity'} · v{c.version ?? 1}
                     </div>
                   </TD>
                   <TD>{c.supplier_id ? supplierName.get(c.supplier_id) ?? '—' : '—'}</TD>
-                  <TD className="font-mono text-xs text-slate-400">{c.reference_number || '—'}</TD>
+                  <TD className="font-mono text-xs text-neutral-400">{c.reference_number || '—'}</TD>
                   <TD>
                     <div>{fmtDate(c.term_end_date)}</div>
                     {d !== null && (
-                      <div className={`text-xs ${d < 0 ? 'text-red-400' : d <= 90 ? 'text-orange-400' : 'text-slate-500'}`}>
+                      <div className={`text-xs ${d < 0 ? 'text-red-400' : d <= 90 ? 'text-red-400' : 'text-neutral-500'}`}>
                         {d < 0 ? `${Math.abs(d)}d overdue` : `${d}d left`}
                       </div>
                     )}

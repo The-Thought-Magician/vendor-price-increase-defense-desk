@@ -107,7 +107,7 @@ export default function PacketsPage() {
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h1 className="text-2xl font-bold text-white">Pushback Packets</h1>
-          <p className="mt-1 text-sm text-slate-400">
+          <p className="mt-1 text-sm text-neutral-400">
             Negotiation-ready rebuttal packets assembled from clause checks, index validations, and creep records.
           </p>
         </div>
@@ -133,12 +133,12 @@ export default function PacketsPage() {
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Search packets by title, tone, or letter…"
-              className="w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-200 placeholder-slate-600 focus:border-orange-500 focus:outline-none focus:ring-1 focus:ring-orange-500/60 sm:max-w-sm"
+              className="w-full rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-200 placeholder-neutral-600 focus:border-red-500 focus:outline-none focus:ring-1 focus:ring-red-500/60 sm:max-w-sm"
             />
             <select
               value={statusFilter}
               onChange={(e) => setStatusFilter(e.target.value)}
-              className="rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-200 focus:border-orange-500 focus:outline-none"
+              className="rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-200 focus:border-red-500 focus:outline-none"
             >
               <option value="all">All statuses</option>
               {statuses.map((s) => (
@@ -147,7 +147,7 @@ export default function PacketsPage() {
                 </option>
               ))}
             </select>
-            <div className="text-xs text-slate-500 sm:ml-auto">
+            <div className="text-xs text-neutral-500 sm:ml-auto">
               {filtered.length} of {packets.length} shown
             </div>
           </div>
@@ -197,24 +197,24 @@ export default function PacketsPage() {
                   const letter = letterMap.get(p.letter_id)
                   return (
                     <TR key={p.id}>
-                      <TD className="font-medium text-slate-100">
-                        <Link href={`/dashboard/packets/${p.id}`} className="hover:text-orange-400">
+                      <TD className="font-medium text-neutral-100">
+                        <Link href={`/dashboard/packets/${p.id}`} className="hover:text-red-400">
                           {p.title || 'Untitled packet'}
                         </Link>
                         {typeof p.version === 'number' && (
-                          <span className="ml-2 text-xs text-slate-500">v{p.version}</span>
+                          <span className="ml-2 text-xs text-neutral-500">v{p.version}</span>
                         )}
                       </TD>
                       <TD>
                         {letter ? (
                           <Link
                             href={`/dashboard/letters/${letter.id}`}
-                            className="text-slate-300 hover:text-orange-400"
+                            className="text-neutral-300 hover:text-red-400"
                           >
                             {letter.title}
                           </Link>
                         ) : (
-                          <span className="text-slate-500">{p.letter_id?.slice(0, 8) ?? '—'}</span>
+                          <span className="text-neutral-500">{p.letter_id?.slice(0, 8) ?? '—'}</span>
                         )}
                         {typeof letter?.proposed_pct === 'number' && (
                           <span className="ml-2 text-xs text-red-400">+{letter.proposed_pct}%</span>
@@ -223,7 +223,7 @@ export default function PacketsPage() {
                       <TD>
                         <Badge tone="blue">{p.tone || 'neutral'}</Badge>
                       </TD>
-                      <TD className="tabular-nums text-orange-400">
+                      <TD className="tabular-nums text-red-400">
                         {typeof p.recommended_counter_pct === 'number'
                           ? `${p.recommended_counter_pct}%`
                           : '—'}
@@ -231,7 +231,7 @@ export default function PacketsPage() {
                       <TD>
                         <Badge tone={verdictTone(p.status)}>{p.status || 'draft'}</Badge>
                       </TD>
-                      <TD className="text-slate-400">{fmtDate(p.updated_at || p.created_at)}</TD>
+                      <TD className="text-neutral-400">{fmtDate(p.updated_at || p.created_at)}</TD>
                       <TD className="text-right">
                         <Link href={`/dashboard/packets/${p.id}`}>
                           <Button variant="ghost" size="sm">

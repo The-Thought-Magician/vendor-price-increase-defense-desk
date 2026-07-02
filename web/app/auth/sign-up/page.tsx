@@ -28,61 +28,61 @@ export default function SignUp() {
   }
 
   return (
-    <main className="flex min-h-screen items-center justify-center bg-slate-950 px-4">
+    <main className="flex min-h-screen items-center justify-center bg-neutral-950 px-4">
       <div className="w-full max-w-md">
         <div className="mb-8 text-center">
           <Link href="/" className="inline-flex items-center gap-2">
-            <span className="flex h-8 w-8 items-center justify-center rounded-md bg-orange-600 text-base font-black text-white">
+            <span className="flex h-8 w-8 items-center justify-center rounded-md bg-red-600 text-base font-bold text-white">
               V
             </span>
-            <span className="text-lg font-black tracking-tight text-orange-400">VendorPriceIncreaseDefenseDesk</span>
+            <span className="text-lg font-bold tracking-tight text-red-400">VendorPriceIncreaseDefenseDesk</span>
           </Link>
           <h1 className="mt-5 text-2xl font-bold text-white">Create your account</h1>
         </div>
-        <form onSubmit={handleSubmit} className="space-y-4 rounded-xl border border-slate-800 bg-slate-900 p-8">
+        <form onSubmit={handleSubmit} className="space-y-4 rounded-xl border border-neutral-800 bg-neutral-900 p-8">
           {error && (
             <div className="rounded-lg border border-red-800 bg-red-950/40 p-3 text-sm text-red-300">{error}</div>
           )}
           <div>
-            <label className="mb-1 block text-sm font-medium text-slate-300">Name</label>
+            <label className="mb-1 block text-sm font-medium text-neutral-300">Name</label>
             <input
               name="name"
               type="text"
               required
-              className="w-full rounded-lg border border-slate-700 bg-slate-800 px-4 py-3 text-white placeholder-slate-500 focus:border-orange-500 focus:outline-none"
+              className="w-full rounded-lg border border-neutral-700 bg-neutral-800 px-4 py-3 text-white placeholder-neutral-500 focus:border-red-500 focus:outline-none"
               placeholder="Your name"
             />
           </div>
           <div>
-            <label className="mb-1 block text-sm font-medium text-slate-300">Email</label>
+            <label className="mb-1 block text-sm font-medium text-neutral-300">Email</label>
             <input
               name="email"
               type="email"
               required
-              className="w-full rounded-lg border border-slate-700 bg-slate-800 px-4 py-3 text-white placeholder-slate-500 focus:border-orange-500 focus:outline-none"
+              className="w-full rounded-lg border border-neutral-700 bg-neutral-800 px-4 py-3 text-white placeholder-neutral-500 focus:border-red-500 focus:outline-none"
               placeholder="you@example.com"
             />
           </div>
           <div>
-            <label className="mb-1 block text-sm font-medium text-slate-300">Password</label>
+            <label className="mb-1 block text-sm font-medium text-neutral-300">Password</label>
             <input
               name="password"
               type="password"
               required
               minLength={8}
-              className="w-full rounded-lg border border-slate-700 bg-slate-800 px-4 py-3 text-white focus:border-orange-500 focus:outline-none"
+              className="w-full rounded-lg border border-neutral-700 bg-neutral-800 px-4 py-3 text-white focus:border-red-500 focus:outline-none"
             />
           </div>
           <button
             type="submit"
             disabled={loading}
-            className="w-full rounded-lg bg-orange-600 py-3 font-semibold text-white transition-colors hover:bg-orange-500 disabled:opacity-50"
+            className="w-full rounded-lg bg-red-600 py-3 font-semibold text-white transition-colors hover:bg-red-500 disabled:opacity-50"
           >
             {loading ? 'Creating account...' : 'Create Account'}
           </button>
-          <p className="text-center text-sm text-slate-400">
+          <p className="text-center text-sm text-neutral-400">
             Already have an account?{' '}
-            <Link href="/auth/sign-in" className="text-orange-400 hover:text-orange-300">
+            <Link href="/auth/sign-in" className="text-red-400 hover:text-red-300">
               Sign in
             </Link>
           </p>

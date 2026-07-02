@@ -148,7 +148,7 @@ export default function AuditPage() {
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div>
           <h1 className="text-2xl font-bold text-white">Audit Trail</h1>
-          <p className="mt-1 text-sm text-slate-500">
+          <p className="mt-1 text-sm text-neutral-500">
             Immutable record of every status change, decision, and contest action across the desk.
           </p>
         </div>
@@ -167,7 +167,7 @@ export default function AuditPage() {
         <CardHeader className="space-y-3">
           <form onSubmit={applyServerFilters} className="flex flex-wrap items-end gap-3">
             <div>
-              <label className="mb-1 block text-xs font-medium uppercase tracking-wide text-slate-500">
+              <label className="mb-1 block text-xs font-medium uppercase tracking-wide text-neutral-500">
                 Entity type
               </label>
               <input
@@ -175,7 +175,7 @@ export default function AuditPage() {
                 onChange={(e) => setEntityType(e.target.value)}
                 list="audit-entity-types"
                 placeholder="e.g. letter"
-                className="w-44 rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-200 placeholder:text-slate-600 focus:border-orange-500 focus:outline-none"
+                className="w-44 rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-200 placeholder:text-neutral-600 focus:border-red-500 focus:outline-none"
               />
               <datalist id="audit-entity-types">
                 {entityTypes.map((t) => (
@@ -184,14 +184,14 @@ export default function AuditPage() {
               </datalist>
             </div>
             <div>
-              <label className="mb-1 block text-xs font-medium uppercase tracking-wide text-slate-500">
+              <label className="mb-1 block text-xs font-medium uppercase tracking-wide text-neutral-500">
                 Entity id
               </label>
               <input
                 value={entityId}
                 onChange={(e) => setEntityId(e.target.value)}
                 placeholder="exact id"
-                className="w-56 rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-200 placeholder:text-slate-600 focus:border-orange-500 focus:outline-none"
+                className="w-56 rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-200 placeholder:text-neutral-600 focus:border-red-500 focus:outline-none"
               />
             </div>
             <Button type="submit" variant="secondary" disabled={loading}>
@@ -207,7 +207,7 @@ export default function AuditPage() {
               <button
                 onClick={() => setActionFilter('all')}
                 className={`rounded-lg px-3 py-1.5 text-xs font-medium transition-colors ${
-                  actionFilter === 'all' ? 'bg-orange-600 text-white' : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
+                  actionFilter === 'all' ? 'bg-red-600 text-white' : 'bg-neutral-800 text-neutral-300 hover:bg-neutral-700'
                 }`}
               >
                 All actions
@@ -217,7 +217,7 @@ export default function AuditPage() {
                   key={a}
                   onClick={() => setActionFilter(a)}
                   className={`rounded-lg px-3 py-1.5 text-xs font-medium transition-colors ${
-                    actionFilter === a ? 'bg-orange-600 text-white' : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
+                    actionFilter === a ? 'bg-red-600 text-white' : 'bg-neutral-800 text-neutral-300 hover:bg-neutral-700'
                   }`}
                 >
                   {a}
@@ -228,7 +228,7 @@ export default function AuditPage() {
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Search events…"
-              className="w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-200 placeholder:text-slate-600 focus:border-orange-500 focus:outline-none sm:w-72"
+              className="w-full rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-200 placeholder:text-neutral-600 focus:border-red-500 focus:outline-none sm:w-72"
             />
           </div>
         </CardHeader>
@@ -272,16 +272,16 @@ export default function AuditPage() {
                   const detailStr = detailToString(e.detail)
                   return (
                     <TR key={e.id}>
-                      <TD className="whitespace-nowrap text-xs text-slate-500">{fmtDateTime(e.created_at)}</TD>
+                      <TD className="whitespace-nowrap text-xs text-neutral-500">{fmtDateTime(e.created_at)}</TD>
                       <TD>
                         <Badge tone={actionTone(e.action)}>{e.action ?? 'unknown'}</Badge>
                       </TD>
                       <TD>
-                        <div className="text-sm text-slate-200">{e.entity_type ?? '—'}</div>
-                        <div className="font-mono text-[11px] text-slate-500">{shortId(e.entity_id)}</div>
+                        <div className="text-sm text-neutral-200">{e.entity_type ?? '—'}</div>
+                        <div className="font-mono text-[11px] text-neutral-500">{shortId(e.entity_id)}</div>
                       </TD>
-                      <TD className="text-sm text-slate-300">{e.actor ?? '—'}</TD>
-                      <TD className="text-xs text-slate-500">
+                      <TD className="text-sm text-neutral-300">{e.actor ?? '—'}</TD>
+                      <TD className="text-xs text-neutral-500">
                         <span className="block max-w-xs truncate" title={detailStr}>
                           {detailStr || '—'}
                         </span>
@@ -309,39 +309,39 @@ export default function AuditPage() {
           <div className="space-y-4">
             <div className="grid grid-cols-2 gap-3 text-sm">
               <div>
-                <div className="text-xs uppercase tracking-wide text-slate-500">Action</div>
+                <div className="text-xs uppercase tracking-wide text-neutral-500">Action</div>
                 <div className="mt-1">
                   <Badge tone={actionTone(selected.action)}>{selected.action ?? 'unknown'}</Badge>
                 </div>
               </div>
               <div>
-                <div className="text-xs uppercase tracking-wide text-slate-500">When</div>
-                <div className="mt-1 text-slate-300">{fmtDateTime(selected.created_at)}</div>
+                <div className="text-xs uppercase tracking-wide text-neutral-500">When</div>
+                <div className="mt-1 text-neutral-300">{fmtDateTime(selected.created_at)}</div>
               </div>
               <div>
-                <div className="text-xs uppercase tracking-wide text-slate-500">Entity type</div>
-                <div className="mt-1 text-slate-300">{selected.entity_type ?? '—'}</div>
+                <div className="text-xs uppercase tracking-wide text-neutral-500">Entity type</div>
+                <div className="mt-1 text-neutral-300">{selected.entity_type ?? '—'}</div>
               </div>
               <div>
-                <div className="text-xs uppercase tracking-wide text-slate-500">Entity id</div>
-                <div className="mt-1 break-all font-mono text-xs text-slate-300">{selected.entity_id ?? '—'}</div>
+                <div className="text-xs uppercase tracking-wide text-neutral-500">Entity id</div>
+                <div className="mt-1 break-all font-mono text-xs text-neutral-300">{selected.entity_id ?? '—'}</div>
               </div>
               <div>
-                <div className="text-xs uppercase tracking-wide text-slate-500">Actor</div>
-                <div className="mt-1 text-slate-300">{selected.actor ?? '—'}</div>
+                <div className="text-xs uppercase tracking-wide text-neutral-500">Actor</div>
+                <div className="mt-1 text-neutral-300">{selected.actor ?? '—'}</div>
               </div>
               <div>
-                <div className="text-xs uppercase tracking-wide text-slate-500">Event id</div>
-                <div className="mt-1 break-all font-mono text-xs text-slate-300">{selected.id}</div>
+                <div className="text-xs uppercase tracking-wide text-neutral-500">Event id</div>
+                <div className="mt-1 break-all font-mono text-xs text-neutral-300">{selected.id}</div>
               </div>
             </div>
 
             <div>
-              <div className="mb-1.5 text-xs uppercase tracking-wide text-slate-500">Detail</div>
+              <div className="mb-1.5 text-xs uppercase tracking-wide text-neutral-500">Detail</div>
               {selected.detail === null || selected.detail === undefined || selected.detail === '' ? (
-                <p className="text-sm text-slate-500">No additional detail recorded.</p>
+                <p className="text-sm text-neutral-500">No additional detail recorded.</p>
               ) : (
-                <pre className="max-h-72 overflow-auto rounded-lg border border-slate-800 bg-slate-950 p-3 text-xs text-slate-300">
+                <pre className="max-h-72 overflow-auto rounded-lg border border-neutral-800 bg-neutral-950 p-3 text-xs text-neutral-300">
                   {typeof selected.detail === 'string'
                     ? selected.detail
                     : JSON.stringify(selected.detail, null, 2)}

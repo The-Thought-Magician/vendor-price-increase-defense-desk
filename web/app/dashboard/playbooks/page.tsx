@@ -265,7 +265,7 @@ export default function PlaybooksPage() {
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div>
           <h1 className="text-2xl font-bold text-white">Decision Playbooks</h1>
-          <p className="mt-1 text-sm text-slate-500">
+          <p className="mt-1 text-sm text-neutral-500">
             Codify when to auto-accept, contest or escalate an increase. Threshold rules drive consistent responses across the desk.
           </p>
         </div>
@@ -293,8 +293,8 @@ export default function PlaybooksPage() {
                 onClick={() => setActiveFilter(f)}
                 className={`rounded-lg px-3 py-1.5 text-xs font-medium capitalize transition-colors ${
                   activeFilter === f
-                    ? 'bg-orange-600 text-white'
-                    : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
+                    ? 'bg-red-600 text-white'
+                    : 'bg-neutral-800 text-neutral-300 hover:bg-neutral-700'
                 }`}
               >
                 {f}
@@ -305,7 +305,7 @@ export default function PlaybooksPage() {
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Search playbooks…"
-            className="w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-200 placeholder:text-slate-600 focus:border-orange-500 focus:outline-none sm:w-72"
+            className="w-full rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-200 placeholder:text-neutral-600 focus:border-red-500 focus:outline-none sm:w-72"
           />
         </CardHeader>
         <CardBody className="p-0">
@@ -338,7 +338,7 @@ export default function PlaybooksPage() {
                 return (
                   <div
                     key={p.id}
-                    className="flex flex-col rounded-xl border border-slate-800 bg-slate-900/50 p-4"
+                    className="flex flex-col rounded-xl border border-neutral-800 bg-neutral-900/50 p-4"
                   >
                     <div className="flex items-start justify-between gap-3">
                       <div className="min-w-0">
@@ -348,49 +348,49 @@ export default function PlaybooksPage() {
                             {p.is_active ? 'active' : 'inactive'}
                           </Badge>
                         </div>
-                        <div className="mt-0.5 text-xs text-slate-500">
+                        <div className="mt-0.5 text-xs text-neutral-500">
                           {p.category_id ? (catName.get(p.category_id) ?? 'Unknown category') : 'All categories'}
                         </div>
                       </div>
                     </div>
 
                     <div className="mt-3 grid grid-cols-3 gap-2 text-center">
-                      <div className="rounded-lg border border-slate-800 bg-slate-950/50 px-2 py-2">
-                        <div className="text-xs text-slate-500">Contest over-ask</div>
-                        <div className="text-sm font-semibold tabular-nums text-orange-400">
+                      <div className="rounded-lg border border-neutral-800 bg-neutral-950/50 px-2 py-2">
+                        <div className="text-xs text-neutral-500">Contest over-ask</div>
+                        <div className="text-sm font-semibold tabular-nums text-red-400">
                           {p.contest_over_ask_pct === null || p.contest_over_ask_pct === undefined
                             ? '—'
                             : `${p.contest_over_ask_pct}%`}
                         </div>
                       </div>
-                      <div className="rounded-lg border border-slate-800 bg-slate-950/50 px-2 py-2">
-                        <div className="text-xs text-slate-500">Accept ≤ index</div>
+                      <div className="rounded-lg border border-neutral-800 bg-neutral-950/50 px-2 py-2">
+                        <div className="text-xs text-neutral-500">Accept ≤ index</div>
                         <div className="text-sm font-semibold">
                           {p.auto_accept_within_index ? (
                             <span className="text-emerald-400">yes</span>
                           ) : (
-                            <span className="text-slate-500">no</span>
+                            <span className="text-neutral-500">no</span>
                           )}
                         </div>
                       </div>
-                      <div className="rounded-lg border border-slate-800 bg-slate-950/50 px-2 py-2">
-                        <div className="text-xs text-slate-500">Accept ≤ cap</div>
+                      <div className="rounded-lg border border-neutral-800 bg-neutral-950/50 px-2 py-2">
+                        <div className="text-xs text-neutral-500">Accept ≤ cap</div>
                         <div className="text-sm font-semibold">
                           {p.auto_accept_under_cap ? (
                             <span className="text-emerald-400">yes</span>
                           ) : (
-                            <span className="text-slate-500">no</span>
+                            <span className="text-neutral-500">no</span>
                           )}
                         </div>
                       </div>
                     </div>
 
                     <div className="mt-3">
-                      <div className="mb-1.5 text-xs font-medium uppercase tracking-wide text-slate-500">
+                      <div className="mb-1.5 text-xs font-medium uppercase tracking-wide text-neutral-500">
                         Threshold rules ({rules.length})
                       </div>
                       {rules.length === 0 ? (
-                        <p className="text-xs text-slate-600">No custom rules. Defaults above apply.</p>
+                        <p className="text-xs text-neutral-600">No custom rules. Defaults above apply.</p>
                       ) : (
                         <div className="space-y-1.5">
                           {rules.map((r, i) => {
@@ -398,11 +398,11 @@ export default function PlaybooksPage() {
                             return (
                               <div
                                 key={r.id ?? i}
-                                className="flex items-center justify-between gap-2 rounded-lg border border-slate-800 bg-slate-950/40 px-3 py-1.5 text-xs"
+                                className="flex items-center justify-between gap-2 rounded-lg border border-neutral-800 bg-neutral-950/40 px-3 py-1.5 text-xs"
                               >
-                                <span className="text-slate-300">
-                                  <span className="text-slate-500">If</span> {metricLabel(r.metric)}{' '}
-                                  <span className="font-mono text-orange-300">{opLabel(r.operator)} {r.threshold}</span>
+                                <span className="text-neutral-300">
+                                  <span className="text-neutral-500">If</span> {metricLabel(r.metric)}{' '}
+                                  <span className="font-mono text-red-300">{opLabel(r.operator)} {r.threshold}</span>
                                 </span>
                                 <Badge tone={meta.tone}>{meta.label}</Badge>
                               </div>
@@ -412,7 +412,7 @@ export default function PlaybooksPage() {
                       )}
                     </div>
 
-                    <div className="mt-4 flex justify-end gap-2 border-t border-slate-800 pt-3">
+                    <div className="mt-4 flex justify-end gap-2 border-t border-neutral-800 pt-3">
                       <Button
                         size="sm"
                         variant="ghost"
@@ -458,23 +458,23 @@ export default function PlaybooksPage() {
             </div>
           )}
           <div>
-            <label className="mb-1 block text-xs font-medium uppercase tracking-wide text-slate-500">Name</label>
+            <label className="mb-1 block text-xs font-medium uppercase tracking-wide text-neutral-500">Name</label>
             <input
               value={form.name}
               onChange={(e) => setForm({ ...form, name: e.target.value })}
               placeholder="e.g. SaaS renewals — standard defense"
-              className="w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-200 placeholder:text-slate-600 focus:border-orange-500 focus:outline-none"
+              className="w-full rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-200 placeholder:text-neutral-600 focus:border-red-500 focus:outline-none"
             />
           </div>
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="mb-1 block text-xs font-medium uppercase tracking-wide text-slate-500">
+              <label className="mb-1 block text-xs font-medium uppercase tracking-wide text-neutral-500">
                 Category scope
               </label>
               <select
                 value={form.category_id}
                 onChange={(e) => setForm({ ...form, category_id: e.target.value })}
-                className="w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-200 focus:border-orange-500 focus:outline-none"
+                className="w-full rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-200 focus:border-red-500 focus:outline-none"
               >
                 <option value="">All categories</option>
                 {[...categories]
@@ -487,7 +487,7 @@ export default function PlaybooksPage() {
               </select>
             </div>
             <div>
-              <label className="mb-1 block text-xs font-medium uppercase tracking-wide text-slate-500">
+              <label className="mb-1 block text-xs font-medium uppercase tracking-wide text-neutral-500">
                 Contest over-ask %
               </label>
               <input
@@ -496,51 +496,51 @@ export default function PlaybooksPage() {
                 value={form.contest_over_ask_pct}
                 onChange={(e) => setForm({ ...form, contest_over_ask_pct: e.target.value })}
                 placeholder="5"
-                className="w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-200 placeholder:text-slate-600 focus:border-orange-500 focus:outline-none"
+                className="w-full rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-200 placeholder:text-neutral-600 focus:border-red-500 focus:outline-none"
               />
             </div>
           </div>
 
           <div className="grid grid-cols-2 gap-3">
-            <label className="flex items-center gap-2 rounded-lg border border-slate-800 bg-slate-950/50 px-3 py-2 text-sm text-slate-300">
+            <label className="flex items-center gap-2 rounded-lg border border-neutral-800 bg-neutral-950/50 px-3 py-2 text-sm text-neutral-300">
               <input
                 type="checkbox"
                 checked={form.auto_accept_within_index}
                 onChange={(e) => setForm({ ...form, auto_accept_within_index: e.target.checked })}
-                className="h-4 w-4 accent-orange-600"
+                className="h-4 w-4 accent-red-600"
               />
               Auto-accept within index
             </label>
-            <label className="flex items-center gap-2 rounded-lg border border-slate-800 bg-slate-950/50 px-3 py-2 text-sm text-slate-300">
+            <label className="flex items-center gap-2 rounded-lg border border-neutral-800 bg-neutral-950/50 px-3 py-2 text-sm text-neutral-300">
               <input
                 type="checkbox"
                 checked={form.auto_accept_under_cap}
                 onChange={(e) => setForm({ ...form, auto_accept_under_cap: e.target.checked })}
-                className="h-4 w-4 accent-orange-600"
+                className="h-4 w-4 accent-red-600"
               />
               Auto-accept under cap
             </label>
           </div>
 
-          <label className="flex items-center gap-2 text-sm text-slate-300">
+          <label className="flex items-center gap-2 text-sm text-neutral-300">
             <input
               type="checkbox"
               checked={form.is_active}
               onChange={(e) => setForm({ ...form, is_active: e.target.checked })}
-              className="h-4 w-4 accent-orange-600"
+              className="h-4 w-4 accent-red-600"
             />
             Playbook is active
           </label>
 
-          <div className="border-t border-slate-800 pt-4">
+          <div className="border-t border-neutral-800 pt-4">
             <div className="mb-2 flex items-center justify-between">
-              <label className="text-xs font-medium uppercase tracking-wide text-slate-500">Threshold rules</label>
+              <label className="text-xs font-medium uppercase tracking-wide text-neutral-500">Threshold rules</label>
               <Button size="sm" variant="secondary" onClick={addRule}>
                 + Add rule
               </Button>
             </div>
             {form.rules.length === 0 ? (
-              <p className="text-xs text-slate-600">
+              <p className="text-xs text-neutral-600">
                 No rules yet. Add a rule like “if proposed % &gt; 8 then escalate”.
               </p>
             ) : (
@@ -548,12 +548,12 @@ export default function PlaybooksPage() {
                 {form.rules.map((r) => (
                   <div
                     key={r.id}
-                    className="grid grid-cols-[1fr_auto_auto_1fr_auto] items-center gap-2 rounded-lg border border-slate-800 bg-slate-950/40 p-2"
+                    className="grid grid-cols-[1fr_auto_auto_1fr_auto] items-center gap-2 rounded-lg border border-neutral-800 bg-neutral-950/40 p-2"
                   >
                     <select
                       value={r.metric}
                       onChange={(e) => updateRule(r.id, { metric: e.target.value })}
-                      className="rounded-md border border-slate-700 bg-slate-950 px-2 py-1.5 text-xs text-slate-200 focus:border-orange-500 focus:outline-none"
+                      className="rounded-md border border-neutral-700 bg-neutral-950 px-2 py-1.5 text-xs text-neutral-200 focus:border-red-500 focus:outline-none"
                     >
                       {METRICS.map((m) => (
                         <option key={m.value} value={m.value}>
@@ -564,7 +564,7 @@ export default function PlaybooksPage() {
                     <select
                       value={r.operator}
                       onChange={(e) => updateRule(r.id, { operator: e.target.value })}
-                      className="rounded-md border border-slate-700 bg-slate-950 px-2 py-1.5 text-xs text-slate-200 focus:border-orange-500 focus:outline-none"
+                      className="rounded-md border border-neutral-700 bg-neutral-950 px-2 py-1.5 text-xs text-neutral-200 focus:border-red-500 focus:outline-none"
                     >
                       {OPERATORS.map((o) => (
                         <option key={o.value} value={o.value}>
@@ -577,12 +577,12 @@ export default function PlaybooksPage() {
                       step="any"
                       value={r.threshold}
                       onChange={(e) => updateRule(r.id, { threshold: Number(e.target.value) })}
-                      className="w-16 rounded-md border border-slate-700 bg-slate-950 px-2 py-1.5 text-xs text-slate-200 focus:border-orange-500 focus:outline-none"
+                      className="w-16 rounded-md border border-neutral-700 bg-neutral-950 px-2 py-1.5 text-xs text-neutral-200 focus:border-red-500 focus:outline-none"
                     />
                     <select
                       value={r.action}
                       onChange={(e) => updateRule(r.id, { action: e.target.value })}
-                      className="rounded-md border border-slate-700 bg-slate-950 px-2 py-1.5 text-xs text-slate-200 focus:border-orange-500 focus:outline-none"
+                      className="rounded-md border border-neutral-700 bg-neutral-950 px-2 py-1.5 text-xs text-neutral-200 focus:border-red-500 focus:outline-none"
                     >
                       {ACTIONS.map((a) => (
                         <option key={a.value} value={a.value}>
@@ -592,7 +592,7 @@ export default function PlaybooksPage() {
                     </select>
                     <button
                       onClick={() => removeRule(r.id)}
-                      className="rounded-md px-2 py-1.5 text-xs text-slate-500 hover:bg-slate-800 hover:text-red-300"
+                      className="rounded-md px-2 py-1.5 text-xs text-neutral-500 hover:bg-neutral-800 hover:text-red-300"
                       aria-label="Remove rule"
                     >
                       ✕

@@ -240,8 +240,8 @@ export default function SettingsPage() {
       {/* Workspace settings */}
       <Card>
         <CardHeader>
-          <h2 className="text-sm font-semibold text-slate-200">Workspace</h2>
-          <p className="mt-1 text-xs text-slate-500">
+          <h2 className="text-sm font-semibold text-neutral-200">Workspace</h2>
+          <p className="mt-1 text-xs text-neutral-500">
             Defaults used across letters, approvals and contest thresholds.
           </p>
         </CardHeader>
@@ -273,7 +273,7 @@ export default function SettingsPage() {
                 hint="Letters with annual impact above this require an approval workflow."
               >
                 <div className="flex items-center gap-2">
-                  <span className="text-sm text-slate-500">$</span>
+                  <span className="text-sm text-neutral-500">$</span>
                   <input
                     value={thresholdDollars}
                     onChange={(e) => setThresholdDollars(e.target.value)}
@@ -299,13 +299,13 @@ export default function SettingsPage() {
                     placeholder="2.0"
                     className={inputClass}
                   />
-                  <span className="text-sm text-slate-500">%</span>
+                  <span className="text-sm text-neutral-500">%</span>
                 </div>
               </Field>
             </div>
 
-            <div className="flex flex-wrap items-center justify-between gap-3 border-t border-slate-800 pt-4">
-              <div className="text-xs text-slate-500">
+            <div className="flex flex-wrap items-center justify-between gap-3 border-t border-neutral-800 pt-4">
+              <div className="text-xs text-neutral-500">
                 {workspace?.created_at && <>Created {fmtDate(workspace.created_at)}. </>}
                 {workspace?.updated_at && <>Last updated {fmtDate(workspace.updated_at)}.</>}
               </div>
@@ -331,13 +331,13 @@ export default function SettingsPage() {
         {/* Sample data */}
         <Card>
           <CardHeader>
-            <h2 className="text-sm font-semibold text-slate-200">Sample Data</h2>
-            <p className="mt-1 text-xs text-slate-500">
+            <h2 className="text-sm font-semibold text-neutral-200">Sample Data</h2>
+            <p className="mt-1 text-xs text-neutral-500">
               Populate the workspace with example suppliers, contracts, indices and increase letters.
             </p>
           </CardHeader>
           <CardBody className="space-y-4">
-            <div className="rounded-lg border border-slate-800 bg-slate-950/40 px-4 py-3 text-sm text-slate-400">
+            <div className="rounded-lg border border-neutral-800 bg-neutral-950/40 px-4 py-3 text-sm text-neutral-400">
               Seeding creates realistic procurement data so you can explore clause checks, index
               validation and pushback packets without manual entry. Resetting removes seeded records
               from this workspace.
@@ -378,45 +378,45 @@ export default function SettingsPage() {
         <Card>
           <CardHeader>
             <div className="flex items-center justify-between gap-2">
-              <h2 className="text-sm font-semibold text-slate-200">Billing & Plan</h2>
+              <h2 className="text-sm font-semibold text-neutral-200">Billing & Plan</h2>
               <Badge tone={isPro ? 'green' : 'neutral'}>{planName}</Badge>
             </div>
-            <p className="mt-1 text-xs text-slate-500">
+            <p className="mt-1 text-xs text-neutral-500">
               Manage your subscription and payment method.
             </p>
           </CardHeader>
           <CardBody className="space-y-4">
             <dl className="grid grid-cols-2 gap-3 text-sm">
               <div>
-                <dt className="text-xs uppercase tracking-wide text-slate-500">Plan</dt>
-                <dd className="mt-1 font-medium text-slate-200">{planName}</dd>
+                <dt className="text-xs uppercase tracking-wide text-neutral-500">Plan</dt>
+                <dd className="mt-1 font-medium text-neutral-200">{planName}</dd>
               </div>
               <div>
-                <dt className="text-xs uppercase tracking-wide text-slate-500">Price</dt>
-                <dd className="mt-1 font-medium text-slate-200">
+                <dt className="text-xs uppercase tracking-wide text-neutral-500">Price</dt>
+                <dd className="mt-1 font-medium text-neutral-200">
                   {plan?.price_cents ? `${fmtMoney(plan.price_cents)}/mo` : 'Free'}
                 </dd>
               </div>
               <div>
-                <dt className="text-xs uppercase tracking-wide text-slate-500">Status</dt>
+                <dt className="text-xs uppercase tracking-wide text-neutral-500">Status</dt>
                 <dd className="mt-1">
                   <Badge tone={verdictTone(sub?.status)}>{sub?.status ?? 'active'}</Badge>
                 </dd>
               </div>
               <div>
-                <dt className="text-xs uppercase tracking-wide text-slate-500">Renews</dt>
-                <dd className="mt-1 font-medium text-slate-200">{fmtDate(sub?.current_period_end)}</dd>
+                <dt className="text-xs uppercase tracking-wide text-neutral-500">Renews</dt>
+                <dd className="mt-1 font-medium text-neutral-200">{fmtDate(sub?.current_period_end)}</dd>
               </div>
             </dl>
 
             {!stripeEnabled && (
-              <div className="rounded-lg border border-slate-800 bg-slate-950/40 px-4 py-3 text-xs text-slate-500">
+              <div className="rounded-lg border border-neutral-800 bg-neutral-950/40 px-4 py-3 text-xs text-neutral-500">
                 Stripe is not configured for this deployment. All features are available on the free
                 plan; upgrade and portal actions require Stripe keys.
               </div>
             )}
 
-            <div className="flex flex-wrap gap-3 border-t border-slate-800 pt-4">
+            <div className="flex flex-wrap gap-3 border-t border-neutral-800 pt-4">
               {!isPro && (
                 <Button onClick={onCheckout} disabled={billingBusy || !stripeEnabled}>
                   {billingBusy ? 'Opening...' : 'Upgrade to Pro'}
@@ -438,7 +438,7 @@ export default function SettingsPage() {
 }
 
 const inputClass =
-  'w-full rounded-lg border border-slate-700 bg-slate-950/60 px-3 py-2 text-sm text-slate-200 placeholder-slate-600 focus:border-orange-500/60 focus:outline-none focus:ring-1 focus:ring-orange-500/60'
+  'w-full rounded-lg border border-neutral-700 bg-neutral-950/60 px-3 py-2 text-sm text-neutral-200 placeholder-neutral-600 focus:border-red-500/60 focus:outline-none focus:ring-1 focus:ring-red-500/60'
 
 function Field({
   label,
@@ -451,11 +451,11 @@ function Field({
 }) {
   return (
     <label className="block">
-      <span className="mb-1.5 block text-xs font-medium uppercase tracking-wide text-slate-500">
+      <span className="mb-1.5 block text-xs font-medium uppercase tracking-wide text-neutral-500">
         {label}
       </span>
       {children}
-      {hint && <span className="mt-1.5 block text-xs text-slate-600">{hint}</span>}
+      {hint && <span className="mt-1.5 block text-xs text-neutral-600">{hint}</span>}
     </label>
   )
 }
@@ -465,7 +465,7 @@ function Header() {
     <div className="flex flex-wrap items-center justify-between gap-3">
       <div>
         <h1 className="text-2xl font-bold text-white">Settings</h1>
-        <p className="mt-1 text-sm text-slate-400">
+        <p className="mt-1 text-sm text-neutral-400">
           Workspace defaults, sample data and billing.
         </p>
       </div>

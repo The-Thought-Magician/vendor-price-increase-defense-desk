@@ -148,7 +148,7 @@ export default function NotificationsPage() {
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div>
           <h1 className="text-2xl font-bold text-white">Notifications</h1>
-          <p className="mt-1 text-sm text-slate-500">
+          <p className="mt-1 text-sm text-neutral-500">
             Breach alerts, approaching deadlines, approval routing, and resolved contests.
           </p>
         </div>
@@ -182,12 +182,12 @@ export default function NotificationsPage() {
                 key={f}
                 onClick={() => setFilter(f)}
                 className={`rounded-lg px-3 py-1.5 text-xs font-medium capitalize transition-colors ${
-                  filter === f ? 'bg-orange-600 text-white' : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
+                  filter === f ? 'bg-red-600 text-white' : 'bg-neutral-800 text-neutral-300 hover:bg-neutral-700'
                 }`}
               >
                 {f}
                 {f === 'unread' && counts.unread > 0 && (
-                  <span className="ml-1.5 rounded-full bg-orange-500/30 px-1.5 text-[10px]">{counts.unread}</span>
+                  <span className="ml-1.5 rounded-full bg-red-500/30 px-1.5 text-[10px]">{counts.unread}</span>
                 )}
               </button>
             ))}
@@ -196,7 +196,7 @@ export default function NotificationsPage() {
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Search notifications…"
-            className="w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-200 placeholder:text-slate-600 focus:border-orange-500 focus:outline-none sm:w-72"
+            className="w-full rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-200 placeholder:text-neutral-600 focus:border-red-500 focus:outline-none sm:w-72"
           />
         </CardHeader>
         <CardBody className="p-0">
@@ -222,14 +222,14 @@ export default function NotificationsPage() {
               />
             </div>
           ) : (
-            <ul className="divide-y divide-slate-800/70">
+            <ul className="divide-y divide-neutral-800/70">
               {filtered.map((n) => {
                 const meta = typeMeta(n.type)
                 return (
                   <li
                     key={n.id}
-                    className={`flex items-start gap-3 px-5 py-4 transition-colors hover:bg-slate-900/50 ${
-                      n.read ? '' : 'bg-orange-950/10'
+                    className={`flex items-start gap-3 px-5 py-4 transition-colors hover:bg-neutral-900/50 ${
+                      n.read ? '' : 'bg-red-950/10'
                     }`}
                   >
                     <div className="mt-0.5 text-lg" aria-hidden>
@@ -237,15 +237,15 @@ export default function NotificationsPage() {
                     </div>
                     <div className="min-w-0 flex-1">
                       <div className="flex flex-wrap items-center gap-2">
-                        <span className="text-sm font-semibold text-slate-100">{n.title ?? 'Notification'}</span>
+                        <span className="text-sm font-semibold text-neutral-100">{n.title ?? 'Notification'}</span>
                         {n.type && <Badge tone={meta.tone}>{n.type}</Badge>}
-                        {!n.read && <span className="h-2 w-2 rounded-full bg-orange-500" aria-label="unread" />}
+                        {!n.read && <span className="h-2 w-2 rounded-full bg-red-500" aria-label="unread" />}
                       </div>
-                      {n.body && <p className="mt-1 text-sm text-slate-400">{n.body}</p>}
-                      <div className="mt-1.5 flex flex-wrap items-center gap-3 text-xs text-slate-500">
+                      {n.body && <p className="mt-1 text-sm text-neutral-400">{n.body}</p>}
+                      <div className="mt-1.5 flex flex-wrap items-center gap-3 text-xs text-neutral-500">
                         <span>{fmtWhen(n.created_at)}</span>
                         {n.link && (
-                          <Link href={n.link} className="text-orange-400 hover:text-orange-300">
+                          <Link href={n.link} className="text-red-400 hover:text-red-300">
                             View →
                           </Link>
                         )}

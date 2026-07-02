@@ -252,15 +252,15 @@ export default function IndicesPage() {
     return { count: dataPoints.length, first, last, changePct }
   }, [dataPoints])
 
-  const field = 'w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-100 placeholder:text-slate-600 focus:border-orange-500 focus:outline-none'
-  const label = 'mb-1 block text-xs font-medium uppercase tracking-wide text-slate-500'
+  const field = 'w-full rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-100 placeholder:text-neutral-600 focus:border-red-500 focus:outline-none'
+  const label = 'mb-1 block text-xs font-medium uppercase tracking-wide text-neutral-500'
 
   return (
     <div className="space-y-6">
       <div className="flex flex-wrap items-center justify-between gap-4">
         <div>
           <h1 className="text-2xl font-bold text-white">Index Library</h1>
-          <p className="mt-1 text-sm text-slate-500">
+          <p className="mt-1 text-sm text-neutral-500">
             PPI, CPI, and bespoke cost indices used to validate every &quot;our costs went up&quot; claim.
           </p>
         </div>
@@ -295,7 +295,7 @@ export default function IndicesPage() {
             />
             <div className="space-y-2">
               {filtered.length === 0 ? (
-                <p className="px-1 text-sm text-slate-500">No indices match.</p>
+                <p className="px-1 text-sm text-neutral-500">No indices match.</p>
               ) : (
                 filtered.map((i) => {
                   const active = i.id === selectedId
@@ -305,16 +305,16 @@ export default function IndicesPage() {
                       onClick={() => setSelectedId(i.id)}
                       className={`w-full rounded-lg border px-4 py-3 text-left transition-colors ${
                         active
-                          ? 'border-orange-600/70 bg-orange-950/30'
-                          : 'border-slate-800 bg-slate-900/50 hover:border-slate-700 hover:bg-slate-900'
+                          ? 'border-red-600/70 bg-red-950/30'
+                          : 'border-neutral-800 bg-neutral-900/50 hover:border-neutral-700 hover:bg-neutral-900'
                       }`}
                     >
                       <div className="flex items-center justify-between gap-2">
-                        <span className="font-mono text-sm font-semibold text-orange-300">{i.code}</span>
+                        <span className="font-mono text-sm font-semibold text-red-300">{i.code}</span>
                         {i.source && <Badge tone="blue">{i.source}</Badge>}
                       </div>
-                      <div className="mt-0.5 truncate text-sm text-slate-200">{i.name}</div>
-                      {i.unit && <div className="text-xs text-slate-500">unit: {i.unit}</div>}
+                      <div className="mt-0.5 truncate text-sm text-neutral-200">{i.name}</div>
+                      {i.unit && <div className="text-xs text-neutral-500">unit: {i.unit}</div>}
                     </button>
                   )
                 })
@@ -332,11 +332,11 @@ export default function IndicesPage() {
                   <CardHeader className="flex flex-wrap items-start justify-between gap-3">
                     <div>
                       <div className="flex items-center gap-2">
-                        <span className="font-mono text-lg font-bold text-orange-300">{selected.code}</span>
+                        <span className="font-mono text-lg font-bold text-red-300">{selected.code}</span>
                         {selected.source && <Badge tone="blue">{selected.source}</Badge>}
                       </div>
                       <h2 className="mt-0.5 text-base font-semibold text-white">{selected.name}</h2>
-                      {selected.description && <p className="mt-1 max-w-xl text-sm text-slate-500">{selected.description}</p>}
+                      {selected.description && <p className="mt-1 max-w-xl text-sm text-neutral-500">{selected.description}</p>}
                     </div>
                     <div className="flex gap-2">
                       <Button variant="secondary" size="sm" onClick={() => openEditIndex(selected)}>Edit</Button>
@@ -407,13 +407,13 @@ export default function IndicesPage() {
                             const pop = prev && prev.value !== 0 ? ((p.value - prev.value) / prev.value) * 100 : null
                             return (
                               <TR key={p.id}>
-                                <TD className="font-mono text-slate-200">{p.period}</TD>
+                                <TD className="font-mono text-neutral-200">{p.period}</TD>
                                 <TD className="tabular-nums">{p.value}</TD>
                                 <TD>
                                   {pop === null ? (
-                                    <span className="text-slate-600">—</span>
+                                    <span className="text-neutral-600">—</span>
                                   ) : (
-                                    <span className={pop >= 0 ? 'text-orange-400' : 'text-emerald-400'}>
+                                    <span className={pop >= 0 ? 'text-red-400' : 'text-emerald-400'}>
                                       {pop >= 0 ? '+' : ''}{pop.toFixed(2)}%
                                     </span>
                                   )}
@@ -496,8 +496,8 @@ export default function IndicesPage() {
           {importErr && (
             <div className="rounded-lg border border-red-800/60 bg-red-950/40 px-3 py-2 text-sm text-red-300">{importErr}</div>
           )}
-          <p className="text-sm text-slate-400">
-            Paste one row per line as <code className="rounded bg-slate-800 px-1 text-orange-300">period, value</code>. Commas, spaces, tabs, or semicolons all work. Existing periods are upserted.
+          <p className="text-sm text-neutral-400">
+            Paste one row per line as <code className="rounded bg-neutral-800 px-1 text-red-300">period, value</code>. Commas, spaces, tabs, or semicolons all work. Existing periods are upserted.
           </p>
           <textarea
             className={`${field} min-h-[200px] font-mono`}
@@ -536,7 +536,7 @@ function IndexTrend({ points, unit }: { points: DataPoint[]; unit: string }) {
     <Card>
       <CardHeader className="flex items-center justify-between">
         <h3 className="text-sm font-semibold text-white">Trend</h3>
-        <span className="text-xs text-slate-500">{points.length} points{unit ? ` · ${unit}` : ''}</span>
+        <span className="text-xs text-neutral-500">{points.length} points{unit ? ` · ${unit}` : ''}</span>
       </CardHeader>
       <CardBody>
         <div className="overflow-x-auto">
@@ -556,9 +556,9 @@ function IndexTrend({ points, unit }: { points: DataPoint[]; unit: string }) {
             ))}
           </svg>
         </div>
-        <div className="mt-2 flex justify-between text-[11px] text-slate-600">
+        <div className="mt-2 flex justify-between text-[11px] text-neutral-600">
           <span>{points[0].period}</span>
-          <span className="text-slate-500">min {min} · max {max}</span>
+          <span className="text-neutral-500">min {min} · max {max}</span>
           <span>{points[points.length - 1].period}</span>
         </div>
       </CardBody>

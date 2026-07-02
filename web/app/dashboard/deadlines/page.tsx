@@ -273,7 +273,7 @@ export default function DeadlinesPage() {
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div>
           <h1 className="text-2xl font-bold text-white">Deadlines</h1>
-          <p className="mt-1 text-sm text-slate-500">
+          <p className="mt-1 text-sm text-neutral-500">
             Track response windows, rebuttal cut-offs and contract renewals so no increase slips through unchallenged.
           </p>
         </div>
@@ -301,7 +301,7 @@ export default function DeadlinesPage() {
             </CardHeader>
             <CardBody className="space-y-2 p-3">
               {overdue.length === 0 ? (
-                <p className="px-2 py-3 text-sm text-slate-500">Nothing overdue. Good.</p>
+                <p className="px-2 py-3 text-sm text-neutral-500">Nothing overdue. Good.</p>
               ) : (
                 overdue.map((d) => (
                   <div
@@ -309,8 +309,8 @@ export default function DeadlinesPage() {
                     className="flex items-center justify-between rounded-lg border border-red-900/40 bg-red-950/20 px-3 py-2"
                   >
                     <div className="min-w-0">
-                      <div className="truncate text-sm font-medium text-slate-200">{d.title}</div>
-                      <div className="text-xs text-slate-500">
+                      <div className="truncate text-sm font-medium text-neutral-200">{d.title}</div>
+                      <div className="text-xs text-neutral-500">
                         {d.kind} · due {fmtDate(d.due_date)}
                       </div>
                     </div>
@@ -327,16 +327,16 @@ export default function DeadlinesPage() {
             </CardHeader>
             <CardBody className="space-y-2 p-3">
               {upcoming.length === 0 ? (
-                <p className="px-2 py-3 text-sm text-slate-500">No deadlines coming up.</p>
+                <p className="px-2 py-3 text-sm text-neutral-500">No deadlines coming up.</p>
               ) : (
                 upcoming.map((d) => (
                   <div
                     key={d.id}
-                    className="flex items-center justify-between rounded-lg border border-slate-800 bg-slate-900/40 px-3 py-2"
+                    className="flex items-center justify-between rounded-lg border border-neutral-800 bg-neutral-900/40 px-3 py-2"
                   >
                     <div className="min-w-0">
-                      <div className="truncate text-sm font-medium text-slate-200">{d.title}</div>
-                      <div className="text-xs text-slate-500">
+                      <div className="truncate text-sm font-medium text-neutral-200">{d.title}</div>
+                      <div className="text-xs text-neutral-500">
                         {d.kind} · due {fmtDate(d.due_date)}
                       </div>
                     </div>
@@ -358,8 +358,8 @@ export default function DeadlinesPage() {
                 onClick={() => setStatusFilter(f)}
                 className={`rounded-lg px-3 py-1.5 text-xs font-medium capitalize transition-colors ${
                   statusFilter === f
-                    ? 'bg-orange-600 text-white'
-                    : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
+                    ? 'bg-red-600 text-white'
+                    : 'bg-neutral-800 text-neutral-300 hover:bg-neutral-700'
                 }`}
               >
                 {f}
@@ -368,7 +368,7 @@ export default function DeadlinesPage() {
             <select
               value={kindFilter}
               onChange={(e) => setKindFilter(e.target.value)}
-              className="ml-1 rounded-lg border border-slate-700 bg-slate-950 px-2.5 py-1.5 text-xs text-slate-200 focus:border-orange-500 focus:outline-none"
+              className="ml-1 rounded-lg border border-neutral-700 bg-neutral-950 px-2.5 py-1.5 text-xs text-neutral-200 focus:border-red-500 focus:outline-none"
             >
               <option value="all">All kinds</option>
               {KIND_OPTIONS.map((k) => (
@@ -379,13 +379,13 @@ export default function DeadlinesPage() {
             </select>
           </div>
           <div className="flex flex-wrap items-center gap-2">
-            <div className="flex overflow-hidden rounded-lg border border-slate-700">
+            <div className="flex overflow-hidden rounded-lg border border-neutral-700">
               {(['list', 'calendar'] as const).map((v) => (
                 <button
                   key={v}
                   onClick={() => setView(v)}
                   className={`px-3 py-1.5 text-xs font-medium capitalize transition-colors ${
-                    view === v ? 'bg-orange-600 text-white' : 'bg-slate-900 text-slate-300 hover:bg-slate-800'
+                    view === v ? 'bg-red-600 text-white' : 'bg-neutral-900 text-neutral-300 hover:bg-neutral-800'
                   }`}
                 >
                   {v}
@@ -396,7 +396,7 @@ export default function DeadlinesPage() {
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Search deadlines…"
-              className="w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-200 placeholder:text-slate-600 focus:border-orange-500 focus:outline-none sm:w-64"
+              className="w-full rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-200 placeholder:text-neutral-600 focus:border-red-500 focus:outline-none sm:w-64"
             />
           </div>
         </CardHeader>
@@ -431,7 +431,7 @@ export default function DeadlinesPage() {
                   Next ›
                 </Button>
               </div>
-              <div className="grid grid-cols-7 gap-1 text-center text-xs font-medium uppercase tracking-wide text-slate-500">
+              <div className="grid grid-cols-7 gap-1 text-center text-xs font-medium uppercase tracking-wide text-neutral-500">
                 {DOW.map((d) => (
                   <div key={d} className="py-1">
                     {d}
@@ -452,13 +452,13 @@ export default function DeadlinesPage() {
                         cell.day === null
                           ? 'border-transparent'
                           : isToday
-                            ? 'border-orange-600/70 bg-orange-950/20'
-                            : 'border-slate-800 bg-slate-900/40'
+                            ? 'border-red-600/70 bg-red-950/20'
+                            : 'border-neutral-800 bg-neutral-900/40'
                       }`}
                     >
                       {cell.day !== null && (
                         <>
-                          <div className={`text-xs ${isToday ? 'font-bold text-orange-300' : 'text-slate-500'}`}>
+                          <div className={`text-xs ${isToday ? 'font-bold text-red-300' : 'text-neutral-500'}`}>
                             {cell.day}
                           </div>
                           <div className="mt-1 space-y-1">
@@ -471,7 +471,7 @@ export default function DeadlinesPage() {
                                     ? 'bg-emerald-950/50 text-emerald-300'
                                     : (daysUntil(d.due_date) ?? 0) < 0
                                       ? 'bg-red-950/50 text-red-300'
-                                      : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
+                                      : 'bg-neutral-800 text-neutral-300 hover:bg-neutral-700'
                                 }`}
                                 title={d.title}
                               >
@@ -479,7 +479,7 @@ export default function DeadlinesPage() {
                               </button>
                             ))}
                             {cell.items.length > 3 && (
-                              <div className="px-1 text-[10px] text-slate-500">+{cell.items.length - 3} more</div>
+                              <div className="px-1 text-[10px] text-neutral-500">+{cell.items.length - 3} more</div>
                             )}
                           </div>
                         </>
@@ -517,13 +517,13 @@ export default function DeadlinesPage() {
               <TBody>
                 {filtered.map((d) => (
                   <TR key={d.id}>
-                    <TD className="font-medium text-slate-200">{d.title}</TD>
+                    <TD className="font-medium text-neutral-200">{d.title}</TD>
                     <TD>
                       <Badge tone="neutral">{d.kind}</Badge>
                     </TD>
-                    <TD className="text-xs text-slate-400">{fmtDate(d.due_date)}</TD>
+                    <TD className="text-xs text-neutral-400">{fmtDate(d.due_date)}</TD>
                     <TD>{dueBadge(d)}</TD>
-                    <TD className="font-mono text-xs text-slate-500">
+                    <TD className="font-mono text-xs text-neutral-500">
                       {d.letter_id ? `L:${shortId(d.letter_id)}` : d.contract_id ? `C:${shortId(d.contract_id)}` : '—'}
                     </TD>
                     <TD className="text-right">
@@ -574,21 +574,21 @@ export default function DeadlinesPage() {
             </div>
           )}
           <div>
-            <label className="mb-1 block text-xs font-medium uppercase tracking-wide text-slate-500">Title</label>
+            <label className="mb-1 block text-xs font-medium uppercase tracking-wide text-neutral-500">Title</label>
             <input
               value={form.title}
               onChange={(e) => setForm({ ...form, title: e.target.value })}
               placeholder="e.g. Respond to Acme price-increase letter"
-              className="w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-200 placeholder:text-slate-600 focus:border-orange-500 focus:outline-none"
+              className="w-full rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-200 placeholder:text-neutral-600 focus:border-red-500 focus:outline-none"
             />
           </div>
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="mb-1 block text-xs font-medium uppercase tracking-wide text-slate-500">Kind</label>
+              <label className="mb-1 block text-xs font-medium uppercase tracking-wide text-neutral-500">Kind</label>
               <select
                 value={form.kind}
                 onChange={(e) => setForm({ ...form, kind: e.target.value })}
-                className="w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-200 focus:border-orange-500 focus:outline-none"
+                className="w-full rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-200 focus:border-red-500 focus:outline-none"
               >
                 {KIND_OPTIONS.map((k) => (
                   <option key={k} value={k}>
@@ -598,21 +598,21 @@ export default function DeadlinesPage() {
               </select>
             </div>
             <div>
-              <label className="mb-1 block text-xs font-medium uppercase tracking-wide text-slate-500">Due date</label>
+              <label className="mb-1 block text-xs font-medium uppercase tracking-wide text-neutral-500">Due date</label>
               <input
                 type="date"
                 value={form.due_date}
                 onChange={(e) => setForm({ ...form, due_date: e.target.value })}
-                className="w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-200 focus:border-orange-500 focus:outline-none"
+                className="w-full rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-200 focus:border-red-500 focus:outline-none"
               />
             </div>
           </div>
           <div>
-            <label className="mb-1 block text-xs font-medium uppercase tracking-wide text-slate-500">Status</label>
+            <label className="mb-1 block text-xs font-medium uppercase tracking-wide text-neutral-500">Status</label>
             <select
               value={form.status}
               onChange={(e) => setForm({ ...form, status: e.target.value })}
-              className="w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-200 focus:border-orange-500 focus:outline-none"
+              className="w-full rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-200 focus:border-red-500 focus:outline-none"
             >
               <option value="open">open</option>
               <option value="done">done</option>
@@ -620,25 +620,25 @@ export default function DeadlinesPage() {
           </div>
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="mb-1 block text-xs font-medium uppercase tracking-wide text-slate-500">
+              <label className="mb-1 block text-xs font-medium uppercase tracking-wide text-neutral-500">
                 Letter id (optional)
               </label>
               <input
                 value={form.letter_id}
                 onChange={(e) => setForm({ ...form, letter_id: e.target.value })}
                 placeholder="link to a letter"
-                className="w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 font-mono text-xs text-slate-200 placeholder:text-slate-600 focus:border-orange-500 focus:outline-none"
+                className="w-full rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 font-mono text-xs text-neutral-200 placeholder:text-neutral-600 focus:border-red-500 focus:outline-none"
               />
             </div>
             <div>
-              <label className="mb-1 block text-xs font-medium uppercase tracking-wide text-slate-500">
+              <label className="mb-1 block text-xs font-medium uppercase tracking-wide text-neutral-500">
                 Contract id (optional)
               </label>
               <input
                 value={form.contract_id}
                 onChange={(e) => setForm({ ...form, contract_id: e.target.value })}
                 placeholder="link to a contract"
-                className="w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 font-mono text-xs text-slate-200 placeholder:text-slate-600 focus:border-orange-500 focus:outline-none"
+                className="w-full rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 font-mono text-xs text-neutral-200 placeholder:text-neutral-600 focus:border-red-500 focus:outline-none"
               />
             </div>
           </div>

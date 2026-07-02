@@ -108,9 +108,9 @@ function downloadCsv(filename: string, rows: (string | number)[][]) {
 
 function Bar({ value, max, tone = 'orange' }: { value: number; max: number; tone?: 'orange' | 'green' | 'red' }) {
   const pct = max > 0 ? Math.min(100, Math.max(0, (value / max) * 100)) : 0
-  const colors = { orange: 'bg-orange-500', green: 'bg-emerald-500', red: 'bg-red-500' }
+  const colors = { orange: 'bg-red-500', green: 'bg-emerald-500', red: 'bg-red-500' }
   return (
-    <div className="h-2 w-full overflow-hidden rounded-full bg-slate-800">
+    <div className="h-2 w-full overflow-hidden rounded-full bg-neutral-800">
       <div className={`h-full rounded-full ${colors[tone]}`} style={{ width: `${pct}%` }} />
     </div>
   )
@@ -226,7 +226,7 @@ export default function ReportsPage() {
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div>
           <h1 className="text-2xl font-bold text-white">Reports &amp; Exports</h1>
-          <p className="mt-1 text-sm text-slate-500">
+          <p className="mt-1 text-sm text-neutral-500">
             Quantify what your pushback program has avoided, and watch the next inflation wave coming.
           </p>
         </div>
@@ -269,8 +269,8 @@ export default function ReportsPage() {
                     onClick={() => setTab(t.key)}
                     className={`rounded-lg px-3 py-1.5 text-xs font-medium transition-colors ${
                       tab === t.key
-                        ? 'bg-orange-600 text-white'
-                        : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
+                        ? 'bg-red-600 text-white'
+                        : 'bg-neutral-800 text-neutral-300 hover:bg-neutral-700'
                     }`}
                   >
                     <span className="mr-1" aria-hidden>{t.icon}</span>
@@ -291,7 +291,7 @@ export default function ReportsPage() {
               {tab === 'savings' && (
                 <div className="space-y-6 p-5">
                   <section>
-                    <h3 className="mb-3 text-sm font-semibold text-slate-200">Avoided savings by supplier</h3>
+                    <h3 className="mb-3 text-sm font-semibold text-neutral-200">Avoided savings by supplier</h3>
                     {bySupplier.length === 0 ? (
                       <EmptyState
                         icon="💰"
@@ -304,7 +304,7 @@ export default function ReportsPage() {
                           .sort((a, b) => (b.avoided_cents ?? 0) - (a.avoided_cents ?? 0))
                           .map((r) => (
                             <div key={r.supplier_id ?? r.supplier_name} className="grid grid-cols-12 items-center gap-3">
-                              <div className="col-span-4 truncate text-sm text-slate-300">
+                              <div className="col-span-4 truncate text-sm text-neutral-300">
                                 {r.supplier_name ?? shortId(r.supplier_id)}
                               </div>
                               <div className="col-span-5">
@@ -320,9 +320,9 @@ export default function ReportsPage() {
                   </section>
 
                   <section>
-                    <h3 className="mb-3 text-sm font-semibold text-slate-200">Breakdown by category</h3>
+                    <h3 className="mb-3 text-sm font-semibold text-neutral-200">Breakdown by category</h3>
                     {byCategory.length === 0 ? (
-                      <p className="text-sm text-slate-500">No category-level savings to show.</p>
+                      <p className="text-sm text-neutral-500">No category-level savings to show.</p>
                     ) : (
                       <Table>
                         <THead>
@@ -337,7 +337,7 @@ export default function ReportsPage() {
                         <TBody>
                           {byCategory.map((r) => (
                             <TR key={r.category_id ?? r.category_name}>
-                              <TD className="text-slate-200">{r.category_name ?? shortId(r.category_id)}</TD>
+                              <TD className="text-neutral-200">{r.category_name ?? shortId(r.category_id)}</TD>
                               <TD className="text-right tabular-nums">{fmtMoney(r.proposed_cents)}</TD>
                               <TD className="text-right tabular-nums">{fmtMoney(r.accepted_cents)}</TD>
                               <TD className="text-right tabular-nums text-emerald-400">{fmtMoney(r.avoided_cents)}</TD>
@@ -362,7 +362,7 @@ export default function ReportsPage() {
                   ) : (
                     <>
                       <section>
-                        <h3 className="mb-3 text-sm font-semibold text-slate-200">
+                        <h3 className="mb-3 text-sm font-semibold text-neutral-200">
                           Average proposed increase by period
                         </h3>
                         <div className="flex items-end gap-3 overflow-x-auto pb-2">
@@ -373,7 +373,7 @@ export default function ReportsPage() {
                               <div key={p.period} className="flex min-w-[3.5rem] flex-col items-center gap-1.5">
                                 <div className="flex h-44 items-end gap-1">
                                   <div
-                                    className="w-5 rounded-t bg-orange-500"
+                                    className="w-5 rounded-t bg-red-500"
                                     style={{ height: `${h}px` }}
                                     title={`Proposed ${fmtPct(p.avg_proposed_pct)}`}
                                   />
@@ -383,14 +383,14 @@ export default function ReportsPage() {
                                     title={`Entitled ${fmtPct(p.avg_entitled_pct)}`}
                                   />
                                 </div>
-                                <div className="text-[10px] font-medium text-slate-400">{p.period}</div>
+                                <div className="text-[10px] font-medium text-neutral-400">{p.period}</div>
                               </div>
                             )
                           })}
                         </div>
-                        <div className="mt-3 flex items-center gap-4 text-xs text-slate-500">
+                        <div className="mt-3 flex items-center gap-4 text-xs text-neutral-500">
                           <span className="flex items-center gap-1.5">
-                            <span className="h-2.5 w-2.5 rounded-sm bg-orange-500" /> Avg proposed %
+                            <span className="h-2.5 w-2.5 rounded-sm bg-red-500" /> Avg proposed %
                           </span>
                           <span className="flex items-center gap-1.5">
                             <span className="h-2.5 w-2.5 rounded-sm bg-sky-600" /> Avg entitled %
@@ -414,16 +414,16 @@ export default function ReportsPage() {
                           <TBody>
                             {periods.map((p) => (
                               <TR key={p.period}>
-                                <TD className="font-medium text-slate-200">{p.period}</TD>
+                                <TD className="font-medium text-neutral-200">{p.period}</TD>
                                 <TD className="text-right tabular-nums">{p.letters ?? 0}</TD>
-                                <TD className="text-right tabular-nums text-orange-400">{fmtPct(p.avg_proposed_pct)}</TD>
+                                <TD className="text-right tabular-nums text-red-400">{fmtPct(p.avg_proposed_pct)}</TD>
                                 <TD className="text-right tabular-nums text-sky-400">{fmtPct(p.avg_entitled_pct)}</TD>
                                 <TD className="text-right tabular-nums">{fmtPct(p.avg_over_ask_pct)}</TD>
                                 <TD className="text-right">
                                   {(p.breaches ?? 0) > 0 ? (
                                     <Badge tone="red">{p.breaches}</Badge>
                                   ) : (
-                                    <span className="text-slate-600">0</span>
+                                    <span className="text-neutral-600">0</span>
                                   )}
                                 </TD>
                                 <TD className="text-right tabular-nums text-emerald-400">{fmtMoney(p.avoided_cents)}</TD>
@@ -448,7 +448,7 @@ export default function ReportsPage() {
                   ) : (
                     <>
                       <section>
-                        <h3 className="mb-3 text-sm font-semibold text-slate-200">
+                        <h3 className="mb-3 text-sm font-semibold text-neutral-200">
                           Average over-ask by supplier
                         </h3>
                         <div className="space-y-2.5">
@@ -456,7 +456,7 @@ export default function ReportsPage() {
                             .sort((a, b) => (b.avg_over_ask_pct ?? 0) - (a.avg_over_ask_pct ?? 0))
                             .map((b) => (
                               <div key={b.supplier_id ?? b.supplier_name} className="grid grid-cols-12 items-center gap-3">
-                                <div className="col-span-4 truncate text-sm text-slate-300">
+                                <div className="col-span-4 truncate text-sm text-neutral-300">
                                   {b.supplier_name ?? shortId(b.supplier_id)}
                                 </div>
                                 <div className="col-span-5">
@@ -488,7 +488,7 @@ export default function ReportsPage() {
                               const tone = score >= 70 ? 'green' : score >= 40 ? 'amber' : 'red'
                               return (
                                 <TR key={b.supplier_id ?? b.supplier_name}>
-                                  <TD className="font-medium text-slate-200">
+                                  <TD className="font-medium text-neutral-200">
                                     {b.supplier_name ?? shortId(b.supplier_id)}
                                   </TD>
                                   <TD className="text-right tabular-nums">{b.total_letters ?? 0}</TD>

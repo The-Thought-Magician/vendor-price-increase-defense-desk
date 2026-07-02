@@ -181,18 +181,18 @@ export default function NewLetterPage() {
   if (loading) return <PageSpinner label="Loading form..." />
 
   const inputCls =
-    'w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-200 placeholder:text-slate-600 focus:border-orange-500 focus:outline-none focus:ring-1 focus:ring-orange-500'
-  const labelCls = 'mb-1 block text-xs font-medium uppercase tracking-wide text-slate-500'
+    'w-full rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-200 placeholder:text-neutral-600 focus:border-red-500 focus:outline-none focus:ring-1 focus:ring-red-500'
+  const labelCls = 'mb-1 block text-xs font-medium uppercase tracking-wide text-neutral-500'
 
   return (
     <div className="mx-auto max-w-4xl space-y-6">
       <div className="flex items-center justify-between gap-3">
         <div>
-          <Link href="/dashboard/letters" className="text-xs text-slate-500 hover:text-orange-400">
+          <Link href="/dashboard/letters" className="text-xs text-neutral-500 hover:text-red-400">
             ← Back to letters
           </Link>
           <h1 className="mt-1 text-2xl font-bold text-white">New Increase Letter</h1>
-          <p className="mt-1 text-sm text-slate-400">
+          <p className="mt-1 text-sm text-neutral-400">
             Log a supplier ask and its line items to begin analysis.
           </p>
         </div>
@@ -208,7 +208,7 @@ export default function NewLetterPage() {
         {/* Letter details */}
         <Card>
           <CardHeader>
-            <h2 className="text-sm font-semibold text-slate-200">Letter Details</h2>
+            <h2 className="text-sm font-semibold text-neutral-200">Letter Details</h2>
           </CardHeader>
           <CardBody className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             <div className="sm:col-span-2">
@@ -329,12 +329,12 @@ export default function NewLetterPage() {
         <Card>
           <CardHeader>
             <div className="flex items-center justify-between">
-              <h2 className="text-sm font-semibold text-slate-200">Line Items</h2>
-              <div className="flex items-center gap-3 text-xs text-slate-400">
+              <h2 className="text-sm font-semibold text-neutral-200">Line Items</h2>
+              <div className="flex items-center gap-3 text-xs text-neutral-400">
                 {totals.count > 0 && (
                   <span>
                     Annual impact:{' '}
-                    <span className="font-semibold tabular-nums text-orange-400">
+                    <span className="font-semibold tabular-nums text-red-400">
                       {totals.impact.toLocaleString(undefined, {
                         style: 'currency',
                         currency: 'USD',
@@ -350,7 +350,7 @@ export default function NewLetterPage() {
             </div>
           </CardHeader>
           <CardBody className="space-y-3">
-            <p className="text-xs text-slate-500">
+            <p className="text-xs text-neutral-500">
               Optional. Prices in dollars per unit; the per-line increase % is computed
               automatically.
             </p>
@@ -360,10 +360,10 @@ export default function NewLetterPage() {
                 return (
                   <div
                     key={l.key}
-                    className="rounded-lg border border-slate-800 bg-slate-950/40 p-3"
+                    className="rounded-lg border border-neutral-800 bg-neutral-950/40 p-3"
                   >
                     <div className="mb-2 flex items-center justify-between">
-                      <span className="text-xs font-medium text-slate-500">Line {i + 1}</span>
+                      <span className="text-xs font-medium text-neutral-500">Line {i + 1}</span>
                       <div className="flex items-center gap-2">
                         {pct != null && (
                           <Badge tone={pct > 0 ? 'red' : pct < 0 ? 'green' : 'neutral'}>
@@ -374,7 +374,7 @@ export default function NewLetterPage() {
                         <button
                           type="button"
                           onClick={() => removeLine(l.key)}
-                          className="text-xs text-slate-500 hover:text-red-400"
+                          className="text-xs text-neutral-500 hover:text-red-400"
                           aria-label="Remove line"
                         >
                           ✕

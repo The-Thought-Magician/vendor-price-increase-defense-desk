@@ -217,7 +217,7 @@ export default function ScenariosPage() {
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div>
           <h1 className="text-2xl font-bold text-white">Counter-Offer Modeling</h1>
-          <p className="mt-1 text-sm text-slate-500">
+          <p className="mt-1 text-sm text-neutral-500">
             Compare accept, capped, indexed, and reject outcomes side by side to pick the strongest counter.
           </p>
         </div>
@@ -248,11 +248,11 @@ export default function ScenariosPage() {
           <Card>
             <CardHeader className="flex flex-wrap items-center justify-between gap-3">
               <div className="flex flex-1 flex-wrap items-center gap-3">
-                <label className="text-xs uppercase tracking-wide text-slate-500">Letter</label>
+                <label className="text-xs uppercase tracking-wide text-neutral-500">Letter</label>
                 <select
                   value={activeLetterId}
                   onChange={(e) => setActiveLetterId(e.target.value)}
-                  className="min-w-[16rem] rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-200 focus:border-orange-500 focus:outline-none"
+                  className="min-w-[16rem] rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-200 focus:border-red-500 focus:outline-none"
                 >
                   {letters.map((l) => (
                     <option key={l.id} value={l.id}>
@@ -301,23 +301,23 @@ export default function ScenariosPage() {
           {scenarios.length > 0 && (
             <Card>
               <CardHeader>
-                <h2 className="text-sm font-semibold text-slate-200">Annual impact comparison</h2>
+                <h2 className="text-sm font-semibold text-neutral-200">Annual impact comparison</h2>
               </CardHeader>
               <CardBody className="space-y-3">
                 {chart.rows.map((r, i) => (
                   <div key={`${r.label}-${i}`} className="flex items-center gap-3">
-                    <div className="w-40 shrink-0 truncate text-xs text-slate-400" title={r.label}>
+                    <div className="w-40 shrink-0 truncate text-xs text-neutral-400" title={r.label}>
                       {r.label}
                     </div>
-                    <div className="flex h-6 flex-1 items-center overflow-hidden rounded bg-slate-800/60">
+                    <div className="flex h-6 flex-1 items-center overflow-hidden rounded bg-neutral-800/60">
                       <div
                         className={`h-full rounded ${
-                          r.recommended ? 'bg-emerald-500' : 'bg-orange-500/80'
+                          r.recommended ? 'bg-emerald-500' : 'bg-red-500/80'
                         }`}
                         style={{ width: `${(Math.abs(r.value) / chart.max) * 100}%` }}
                       />
                     </div>
-                    <div className="w-28 shrink-0 text-right text-xs tabular-nums text-slate-300">
+                    <div className="w-28 shrink-0 text-right text-xs tabular-nums text-neutral-300">
                       {fmtMoney(r.value)}
                     </div>
                   </div>
@@ -328,12 +328,12 @@ export default function ScenariosPage() {
 
           <Card>
             <CardHeader className="flex flex-wrap items-center justify-between gap-3">
-              <h2 className="text-sm font-semibold text-slate-200">Scenario set</h2>
+              <h2 className="text-sm font-semibold text-neutral-200">Scenario set</h2>
               <input
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 placeholder="Filter scenarios…"
-                className="w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-200 placeholder:text-slate-600 focus:border-orange-500 focus:outline-none sm:w-64"
+                className="w-full rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-200 placeholder:text-neutral-600 focus:border-red-500 focus:outline-none sm:w-64"
               />
             </CardHeader>
             <CardBody className="p-0">
@@ -384,7 +384,7 @@ export default function ScenariosPage() {
                   <TBody>
                     {visibleScenarios.map((s) => (
                       <TR key={s.id} className={s.is_recommended ? 'bg-emerald-950/20' : ''}>
-                        <TD className="font-medium text-slate-200">
+                        <TD className="font-medium text-neutral-200">
                           <div className="flex items-center gap-2">
                             {s.name}
                             {s.is_recommended && <Badge tone="green">Recommended</Badge>}
@@ -395,7 +395,7 @@ export default function ScenariosPage() {
                         </TD>
                         <TD className="text-right tabular-nums">{fmtPct(s.applied_pct)}</TD>
                         <TD className="text-right tabular-nums">{fmtMoney(s.annual_impact_cents)}</TD>
-                        <TD className="text-xs text-slate-500">
+                        <TD className="text-xs text-neutral-500">
                           <span className="block max-w-xs truncate" title={s.detail ?? ''}>
                             {s.detail || '—'}
                           </span>
@@ -437,20 +437,20 @@ export default function ScenariosPage() {
             </div>
           )}
           <div>
-            <label className="mb-1 block text-xs uppercase tracking-wide text-slate-500">Name</label>
+            <label className="mb-1 block text-xs uppercase tracking-wide text-neutral-500">Name</label>
             <input
               value={form.name}
               onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))}
               placeholder="e.g. Counter at index-entitled %"
-              className="w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-200 placeholder:text-slate-600 focus:border-orange-500 focus:outline-none"
+              className="w-full rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-200 placeholder:text-neutral-600 focus:border-red-500 focus:outline-none"
             />
           </div>
           <div>
-            <label className="mb-1 block text-xs uppercase tracking-wide text-slate-500">Type</label>
+            <label className="mb-1 block text-xs uppercase tracking-wide text-neutral-500">Type</label>
             <select
               value={form.scenario_type}
               onChange={(e) => setForm((f) => ({ ...f, scenario_type: e.target.value }))}
-              className="w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-200 focus:border-orange-500 focus:outline-none"
+              className="w-full rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-200 focus:border-red-500 focus:outline-none"
             >
               {SCENARIO_TYPES.map((t) => (
                 <option key={t} value={t}>
@@ -461,7 +461,7 @@ export default function ScenariosPage() {
           </div>
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="mb-1 block text-xs uppercase tracking-wide text-slate-500">
+              <label className="mb-1 block text-xs uppercase tracking-wide text-neutral-500">
                 Applied %
               </label>
               <input
@@ -470,11 +470,11 @@ export default function ScenariosPage() {
                 value={form.applied_pct}
                 onChange={(e) => setForm((f) => ({ ...f, applied_pct: e.target.value }))}
                 placeholder="0.00"
-                className="w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-200 placeholder:text-slate-600 focus:border-orange-500 focus:outline-none"
+                className="w-full rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-200 placeholder:text-neutral-600 focus:border-red-500 focus:outline-none"
               />
             </div>
             <div>
-              <label className="mb-1 block text-xs uppercase tracking-wide text-slate-500">
+              <label className="mb-1 block text-xs uppercase tracking-wide text-neutral-500">
                 Annual impact ($)
               </label>
               <input
@@ -483,18 +483,18 @@ export default function ScenariosPage() {
                 value={form.annual_impact_cents}
                 onChange={(e) => setForm((f) => ({ ...f, annual_impact_cents: e.target.value }))}
                 placeholder="0.00"
-                className="w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-200 placeholder:text-slate-600 focus:border-orange-500 focus:outline-none"
+                className="w-full rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-200 placeholder:text-neutral-600 focus:border-red-500 focus:outline-none"
               />
             </div>
           </div>
           <div>
-            <label className="mb-1 block text-xs uppercase tracking-wide text-slate-500">Detail</label>
+            <label className="mb-1 block text-xs uppercase tracking-wide text-neutral-500">Detail</label>
             <textarea
               value={form.detail}
               onChange={(e) => setForm((f) => ({ ...f, detail: e.target.value }))}
               rows={3}
               placeholder="Rationale or notes for this scenario…"
-              className="w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-200 placeholder:text-slate-600 focus:border-orange-500 focus:outline-none"
+              className="w-full rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-200 placeholder:text-neutral-600 focus:border-red-500 focus:outline-none"
             />
           </div>
         </form>
